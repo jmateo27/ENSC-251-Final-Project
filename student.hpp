@@ -7,18 +7,35 @@ using namespace std; //use namespace std
 class Student{
 //parent class of the DomesticStudent and InternationalStudent class
     public:
+
+        //constructs
         Student(string FName, string LName, float grade, int RScore, int id);
         Student(string FName, string LName, int id);
         Student();
-        void set_FirstName(string FName);
-        void set_LastName(string LName);
-        void set_CGPA(float grade);
-        void set_ResearchScore(int RScore);
-        void set_AppID(int id);
+
+        //set functions
+        void setFirstName(string FName);
+        void setLastName(string LName);
+        void setCGPA(float grade);
+        void setResearchScore(int RScore);
+        void setAppID(int id);
+
+        //get functions 
+        string getFirstName(); 
+        string getLastName(); 
+        float getCGPA(); 
+        int getRScore(); 
+        int getid(); 
+
+        //compare functions
         friend int compareCGPA(Student student1, Student student2);
         friend int compareResearchScore(Student student1, Student student2);
-        friend int compareFirstName(Student student1, Student student2);
-        friend int compareLastName(Student student1, Student student2);
+        friend int compareFirstName(Student student1, Student student2, unsigned int len);
+        friend int compareLastName(Student student1, Student student2, unsigned int len);
+
+        //extra stuff
+        friend unsigned int findlen(string student1, string student2); 
+
     private:
         string FirstName;
         string LastName;
@@ -29,14 +46,6 @@ class Student{
 
 class DomesticStudent: public Student{
 //child class of the Student class
-    public:
-        DomesticStudent(string FName, string LName, float grade, int RScore, int id, string Prov);
-        DomesticStudent(string FName, string LName, int id, string Prov);
-        DomesticStudent();
-        void set_Province(string Prov);
-    private:
-        string Province;
-};
 
 class InternationalStudent: public Student{
 //child class of the Student class
