@@ -46,6 +46,14 @@ class Student{
 
 class DomesticStudent: public Student{
 //child class of the Student class
+    public:
+        DomesticStudent(string FName, string LName, float grade, int RScore, int id, string Prov);
+        DomesticStudent(string FName, string LName, int id, string Prov);
+        DomesticStudent();
+        void set_Province(string Prov);
+    private:
+        string Province;
+};
 
 class InternationalStudent: public Student{
 //child class of the Student class

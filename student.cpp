@@ -41,3 +41,35 @@ void Student::setAppID(int id){
     AppID = id; 
 }
 
+DomesticStudent::DomesticStudent(string FName, string LName, float grade, int RScore, int id, string Prov): 
+    Student(FName, LName, grade, RScore, id){//Takes info from student class
+        Province = Prov;
+    }
+
+DomesticStudent::DomesticStudent(string FName, string LName, int id, string Prov):
+    Student(FName, LName, id){//Takes info from student class
+        Province = Prov;
+    }
+
+DomesticStudent::DomesticStudent(){
+    //default constructor
+}
+
+InternationalStudent::InternationalStudent(string FName, string LName, float grade, int RScore, int id, string Con, int TOEFL):
+    Student(FName, LName, grade, RScore, id){
+            Country = Con;
+            TOEFLScore = TOEFL;
+    }
+
+InternationalStudent::InternationalStudent(string FName, string LName, int id, string Con, int TOEFL) :
+    Student(FName, LName, id){
+            Country = Con;
+            TOEFLScore = TOEFL;
+    }
+
+InternationalStudent::InternationalStudent(){
+    //default constructor
+}
+
+
+
