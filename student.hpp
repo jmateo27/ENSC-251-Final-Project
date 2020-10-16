@@ -25,16 +25,29 @@ class Student{
         float CGPA;
         int ResearchScore;
         int AppID; //just four digits
-}
 };
 
-class DomesticStudent public: Student{
+class DomesticStudent: public Student{
 //child class of the Student class
-hehe
+    public:
+        DomesticStudent(string FName, string LName, float grade, int RScore, int id, string Prov);
+        DomesticStudent(string FName, string LName, int id, string Prov);
+        DomesticStudent();
+        void set_Province(string Prov);
+    private:
+        string Province;
 };
 
-class InternationalStudent public: Student{
+class InternationalStudent: public Student{
 //child class of the Student class
-
+    public:
+        InternationalStudent(string FName, string LName, float grade, int RScore, int id, string Con, int TOEFL);
+        InternationalStudent(string FName, string LName, float id, string Con, int TOEFL);
+        InternationalStudent();
+        void set_Country(string Con);
+        void set_TOEFLScore(int TOEFL);
+    private:
+        string Country;
+        int TOEFLScore;
 };
 #endif //STUDENT_H
