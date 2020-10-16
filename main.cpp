@@ -18,7 +18,7 @@ int main(){
     cout << "Unable to open file domestic-stu.txt" << endl;
     return -1;
   }
-
+ieuhrbgiuaheroiv eaiobjeioabioertajbiojeiobj rt jbjrtibjrtwoipbj eoip
   //Read the first line of domestic-stu.txt, which specifies
   //the file format. And then print it out to the screen
   getline(domesticFile, line);
