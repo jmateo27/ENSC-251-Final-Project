@@ -40,3 +40,15 @@ void Student::set_ResearchScore(int RScore){
 void Student::set_AppID(int id){
     AppID = id; 
 }
+
+
+int compareCGPA(Student student1, Student student2){
+    float CGPA1 = student1.getCGPA();
+    float CGPA2 = student2.getCGPA();
+    if (CGPA1 == CGPA2)
+        return 0;
+    else if (CGPA1 > CGPA2)
+        return 1;
+    else // CGPA1 < CGPA2
+        return -1;
+}
