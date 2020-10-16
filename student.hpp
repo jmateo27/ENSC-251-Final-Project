@@ -7,7 +7,8 @@ using namespace std; //use namespace std
 class Student{
 //parent class of the DomesticStudent and InternationalStudent class
     public:
-        Student(string FirstName, string LastName, float CGPA, int ResearchScore, int AppID);
+        Student(string FName, string LName, float CGPA_in, int ResearchScore_in, int AppID_in);
+        Student(string FName, string LName, int AppID_in);
         Student();
         void set_FirstName(string FirstName);
         void set_LastName(string LastName);
