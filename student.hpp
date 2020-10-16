@@ -14,15 +14,15 @@ class Student{
         Student();
 
         //set functions
-        void set_FirstName(string FName);
-        void set_LastName(string LName);
-        void set_CGPA(float grade);
-        void set_ResearchScore(int RScore);
-        void set_AppID(int id);
+        void setFirstName(string FName);
+        void setLastName(string LName);
+        void setCGPA(float grade);
+        void setResearchScore(int RScore);
+        void setAppID(int id);
 
         //get functions 
-        string get_FirstName(); 
-        string get_LastName(); 
+        string getFirstName(); 
+        string getLastName(); 
         float getCGPA(); 
         int getRScore(); 
         int getid(); 
@@ -32,6 +32,10 @@ class Student{
         friend int compareResearchScore(Student student1, Student student2);
         friend int compareFirstName(Student student1, Student student2);
         friend int compareLastName(Student student1, Student student2);
+
+        //extra stuff
+        friend unsigned int findlen(string student1, string student2); 
+
     private:
         string FirstName;
         string LastName;
@@ -43,7 +47,7 @@ class Student{
 
 class DomesticStudent public: Student{
 //child class of the Student class
-hehe
+
 };
 
 class InternationalStudent public: Student{
