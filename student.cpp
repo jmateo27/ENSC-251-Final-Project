@@ -109,7 +109,7 @@ InternationalStudent::InternationalStudent(string FName, string LName, float gra
             TOEFLScore = TOEFL;
     }
 
-InternationalStudent::InternationalStudent(string FName, string LName, float id, string Con, int TOEFL) :
+InternationalStudent::InternationalStudent(string FName, string LName, int id, string Con, int TOEFL) :
     Student(FName, LName, id){
             Country = Con;
             TOEFLScore = TOEFL;
