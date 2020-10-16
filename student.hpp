@@ -30,7 +30,7 @@ class Student{
 
 class DomesticStudent public: Student{
 //child class of the Student class
-
+hehe
 };
 
 class InternationalStudent public: Student{
