@@ -30,8 +30,8 @@ class Student{
         //compare functions
         friend int compareCGPA(Student student1, Student student2);
         friend int compareResearchScore(Student student1, Student student2);
-        friend int compareFirstName(Student student1, Student student2);
-        friend int compareLastName(Student student1, Student student2);
+        friend int compareFirstName(Student student1, Student student2, unsigned int len);
+        friend int compareLastName(Student student1, Student student2, unsigned int len);
 
         //extra stuff
         friend unsigned int findlen(string student1, string student2); 
