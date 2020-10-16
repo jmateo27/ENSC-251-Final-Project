@@ -7,14 +7,27 @@ using namespace std; //use namespace std
 class Student{
 //parent class of the DomesticStudent and InternationalStudent class
     public:
+
+        //constructs
         Student(string FName, string LName, float grade, int RScore, int id);
         Student(string FName, string LName, int id);
         Student();
+
+        //set functions
         void set_FirstName(string FName);
         void set_LastName(string LName);
         void set_CGPA(float grade);
         void set_ResearchScore(int RScore);
         void set_AppID(int id);
+
+        //get functions 
+        string get_FirstName(); 
+        string get_LastName(); 
+        float getCGPA(); 
+        int getRScore(); 
+        int getid(); 
+
+        //compare functions
         friend int compareCGPA(Student student1, Student student2);
         friend int compareResearchScore(Student student1, Student student2);
         friend int compareFirstName(Student student1, Student student2);
