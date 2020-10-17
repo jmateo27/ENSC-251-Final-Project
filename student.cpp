@@ -76,26 +76,23 @@ int compareCGPA(Student student1, Student student2){
 }
 
 int compareFirstName (Student student1, Student student2){
-    std::string s1 = student1.getFirstName();
-    std::string s2 = student2.getFirstName(); 
-    unsigned int len1 = s1.length(); 
-    unsigned int len2 = s2.length(); 
-    unsigned int len =0; 
-
-    if (len1 >= len2 )
-        len = len1; 
+    std::string name1 = student1.getFirstName();
+    std::string name2 = student2.getFirstName();
+    int len = 0;
+    if (name1.length() >= name2.length())
+        len = name1.length();
     else
-        len = len2; 
-        
-    for(int i = 0; i < len; i++){
-        if (s1[i] == s2[i])
-            continue; 
-        else if (s1[i] > s2[i])
-            return 0; 
-        else  //s1 < s2
-            return 1; 
+        len = name2.length();
+
+    for (int i = 0; i < len; i++){
+        if (upper2lowercase(name1[i]) < upper2lowercase(name2[i])){
+            return 1;
+        }
+        else if (upper2lowercase(name1[i]) > upper2lowercase(name2[i])){
+            return -1;
+        }
     }
-}
+    return 0;
 }
 
 
@@ -198,4 +195,17 @@ int ToeflScore::getWriting()
 int ToeflScore::getTOEFL(){
     TOEFL = (reading + listening + speaking + writing);
     return TOEFL;
+}
 
+char upper2lowercase(char c){
+  //checks if letter is within the scope
+  if (c >= 'A' && c <= 'Z'){
+    c += 32;
+    //add 32 according to the ascii table
+  }
+  else{
+    //no changes made otherwise
+    return c; 
+  }
+  return c; 
+}

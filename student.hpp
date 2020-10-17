@@ -69,7 +69,7 @@ class InternationalStudent : public Student{
           
         void set_Country(string Con);
         void set_TOEFLScore(int TOEFL);
-    friend std::ostream& operator <<(std::ostream& outs, const InternationalStudent& theIntStudent);
+        friend std::ostream& operator <<(std::ostream& outs, const InternationalStudent& theIntStudent);
     private:
         string Country;
         int TOEFLScore;
@@ -97,3 +97,5 @@ class ToeflScore{
 
 };
 #endif //STUDENT_H
+
+char upper2lowercase(char c);
