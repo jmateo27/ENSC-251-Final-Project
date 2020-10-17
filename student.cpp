@@ -132,7 +132,7 @@ DomesticStudent::DomesticStudent(){
 string DomesticStudent::get_Province()
 {return Province;}
 
-void DomesticStudent::dstu(std::ostream& outs, Student theStudent) const
+void DomesticStudent::dstu(std::ostream& outs, DomesticStudent theStudent) const
 {
     std::cout << "The student name is: " << theStudent.getFirstName() << theStudent.getLastName();
     std::cout << "\nThe student is from: " << get_Province();
@@ -163,7 +163,7 @@ InternationalStudent::InternationalStudent(){
 string InternationalStudent::get_Country()
 { return Country;}
 
-void InternationalStudent::istu(std::ostream& outs, Student theStudent) const
+void InternationalStudent::istu(std::ostream& outs, InternationalStudent theStudent) const
 {
     std::cout << "The student name is: " << theStudent.getFirstName() << theStudent.getLastName();
     std::cout << "\nThey are from: " << get_Country();
