@@ -30,8 +30,8 @@ class Student{
         //compare functions
         friend int compareCGPA(Student student1, Student student2);
         friend int compareResearchScore(Student student1, Student student2);
-        friend int compareFirstName(Student student1, Student student2, unsigned int len);
-        friend int compareLastName(Student student1, Student student2, unsigned int len);
+        friend int compareFirstName(Student student1, Student student2);
+        friend int compareLastName(Student student1, Student student2);
 
         //extra stuff
         friend unsigned int findlen(string student1, string student2); 
@@ -51,6 +51,7 @@ class DomesticStudent : public Student{
         DomesticStudent(string FName, string LName, int id, string Prov);
         DomesticStudent();
         string get_Province();
+        void dstu(std::ostream& outs) const;
         void set_Province(string Prov);
     friend std::ostream& operator <<(std::ostream& outs, const DomesticStudent& theDomStudent);
 
@@ -69,6 +70,8 @@ class InternationalStudent : public Student{
           
         void set_Country(string Con);
         void set_TOEFLScore(int TOEFL);
+        void istu(std::ostream& outs) const;
+
         friend std::ostream& operator <<(std::ostream& outs, const InternationalStudent& theIntStudent);
     private:
         string Country;

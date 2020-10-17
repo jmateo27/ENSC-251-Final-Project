@@ -47,7 +47,7 @@ string Student::getFirstName(){
     return FirstName; 
 }
 
-string Student::getLastName(){
+std::string Student::getLastName(){
     return LastName; 
 }
 
@@ -94,6 +94,25 @@ int compareFirstName (Student student1, Student student2){
     }
     return 0;
 }
+int compareLastName (Student student1, Student student2){
+    std::string name1 = student1.getLastName();
+    std::string name2 = student2.getLastName();
+    int len = 0;
+    if (name1.length() >= name2.length())
+        len = name1.length();
+    else
+        len = name2.length();
+
+    for (int i = 0; i < len; i++){
+        if (upper2lowercase(name1[i]) < upper2lowercase(name2[i])){
+            return 1;
+        }
+        else if (upper2lowercase(name1[i]) > upper2lowercase(name2[i])){
+            return -1;
+        }
+    }
+    return 0;
+}
 
 
 DomesticStudent::DomesticStudent(string FName, string LName, float grade, int RScore, int id, string Prov): 
@@ -113,13 +132,17 @@ DomesticStudent::DomesticStudent(){
 string DomesticStudent::get_Province()
 {return Province;}
 
+void dstu(std::ostream& outs) const
+{
+    std::cout << "The student name is: " << theDomStudent.getFirstName() << Student.getLastName();
+    std::cout << "\nThe student is from: " << get_Province();
+    std::cout << "\nThe CGPA is: " << theDomStudent.getCGPA();
+    std::cout << "\nThe Reseach Score is: " << theDomStudent.getRScore();
+    std::cout << "\nThe student ID is: " << theDomStudent.getid()<< "\n";
+}
 std::ostream& operator <<(std::ostream& outs, const DomesticStudent& theDomStudent)
 {
-    std::cout << "The student name is: " << Student.getFirstName() << Student.getLastName();
-    std::cout << "\nThe student is from: " << get_Province();
-    std::cout << "\nThe CGPA is: " << Student.getCGPA();
-    std::cout << "\nThe Reseach Score is: " << Student.getRScore();
-    std::cout << "\nThe student ID is: " << Student.getid()<< "\n";
+    theDomStudent.dstu(outs);
 }
 
 InternationalStudent::InternationalStudent(string FName, string LName, float grade, int RScore, int id, string Con, int TOEFL):
@@ -140,15 +163,20 @@ InternationalStudent::InternationalStudent(){
 string InternationStudent::get_Country()
 { return Country;}
 
-std::ostream& operator <<(std::ostream& outs, const InternationalStudent& theIntStudent)
+void istru(std::ostream& outs) const
 {
-    std::cout << "The student name is: " << Student.getFirstName() << Student.getLastName();
+    std::cout << "The student name is: " << theIntStudent.getFirstName() << Student.getLastName();
     std::cout << "\nThey are from: " << get_Country();
-    std::cout << "\nThe CGPA is: " << Student.getCGPA();
-    std::cout << "\nThe Reseach Score is: " << Student.getRScore();
-    std::cout << "\nThe student ID is: " << Student.getid();
+    std::cout << "\nThe CGPA is: " << theIntStudent.getCGPA();
+    std::cout << "\nThe Reseach Score is: " << theIntStudent.getRScore();
+    std::cout << "\nThe student ID is: " << theIntStudent.getid();
     std::cout << "\nThe student TOEFL score is: \nReading:" << ToeflScore.getReading() << "/30";
     std::cout << "\nListening:" << ToeflScore.getListening() << "/30" << "\nSpeaking: " << ToeflScore.getSpeaking() << "/30" << "\nWriting: " << ToeflScore.getWriting();
+}
+
+std::ostream& operator <<(std::ostream& outs, const InternationalStudent& theIntStudent)
+{
+    theIntStudent.istu(outs);
 }
 
 ToeflScore::ToeflScore(int read, int listen, int speak, int write){
