@@ -104,6 +104,18 @@ DomesticStudent::DomesticStudent(){
     //default constructor
 }
 
+string DomesticStudent::get_Province()
+{return Province;}
+
+std::ostream& operator <<(std::ostream& outs, const DomesticStudent& theDomStudent)
+{
+    std::cout << "The student name is: " << Student.getFirstName() << Student.getLastName();
+    std::cout << "\The student is from: " << get_Province();
+    std::cout << "\nThe CGPA is: " << Student.getCGPA();
+    std::cout << "\nThe Reseach Score is: " << Student.getRScore();
+    std::cout << "\nThe student ID is: " << Student.getid()<< "\n";
+}
+
 InternationalStudent::InternationalStudent(string FName, string LName, float grade, int RScore, int id, string Con, int TOEFL):
     Student(FName, LName, grade, RScore, id){
             Country = Con;
@@ -119,6 +131,19 @@ InternationalStudent::InternationalStudent(string FName, string LName, int id, s
 InternationalStudent::InternationalStudent(){
     //default constructor
 }
+string InternationStudent::get_Country()
+{ return Country;}
+
+std::ostream& operator <<(std::ostream& outs, const InternationStudent& theIntStudent)
+{
+    std::cout << "The student name is: " << Student.getFirstName() << Student.getLastName();
+    std::cout << "\nThey are from: " << get_Country();
+    std::cout << "\nThe CGPA is: " << Student.getCGPA();
+    std::cout << "\nThe Reseach Score is: " << Student.getRScore();
+    std::cout << "\nThe student ID is: " << Student.getid();
+    std::cout << "\nThe student TOEFL score is: \nReading:" << ToeflScore.getReading() << "/30";
+    std::cout << "\nListening:" << ToeflScore.getListening() << "/30" << "\nSpeaking: " << ToeflScore.getSpeaking() << "/30" << "\nWriting: " << ToeflScore.getWriting();
+}
 
 ToeflScore::ToeflScore(int read, int listen, int speak, int write){
     reading = read;
@@ -130,6 +155,7 @@ ToeflScore::ToeflScore(int read, int listen, int speak, int write){
 ToeflScore::ToeflScore(){
     //default constructor
 }
+
 //set functions for Toefl
 void ToeflScore::setReading(int read){
     reading = read;
@@ -147,8 +173,20 @@ void ToeflScore::setWriting(int write){
     writing = write;
 }
 
+int ToeflScore::getReading()
+{ return reading;}
+
+int ToeflScore::getListening()
+{ return listening;}
+
+int ToeflScore::getSpeaking()
+{ return speaking;}
+
+int ToeflScore::getWriting()
+{ return writing;}
+
 //Total score
 int ToeflScore::getTOEFL(){
     TOEFL = (reading + listening + speaking + writing);
     return TOEFL;
-}
+

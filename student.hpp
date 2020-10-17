@@ -50,7 +50,11 @@ class DomesticStudent : public Student{
         DomesticStudent(string FName, string LName, float grade, int RScore, int id, string Prov);
         DomesticStudent(string FName, string LName, int id, string Prov);
         DomesticStudent();
+        string get_Province();
         void set_Province(string Prov);
+    friend std::ostream& operator <<(std::ostream& outs, const DomesticStudent& theDomStudent);
+
+    // friend operator << (string FName, string LName, float grade, int RScore, int id, string Prov);
     private:
         string Province;
 };
@@ -61,8 +65,11 @@ class InternationalStudent : public Student{
         InternationalStudent(string FName, string LName, float grade, int RScore, int id, string Con, int TOEFL);
         InternationalStudent(string FName, string LName, int id, string Con, int TOEFL);
         InternationalStudent();
+        string get_Country();
+          
         void set_Country(string Con);
         void set_TOEFLScore(int TOEFL);
+    friend std::ostream& operator <<(std::ostream& outs, const InternationStudent& theIntStudent);
     private:
         string Country;
         int TOEFLScore;
@@ -78,7 +85,12 @@ class ToeflScore{
         void setSpeaking(int speak);
         void setWriting(int write);
         //get
+        int getReading();
+        int getListening();
+        int getSpeaking();
+        int getWriting();
         int getTOEFL();
+        
 
     private:
         int reading, listening, speaking, writing, TOEFL;
