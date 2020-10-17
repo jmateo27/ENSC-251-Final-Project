@@ -134,11 +134,11 @@ string DomesticStudent::get_Province()
 
 void DomesticStudent::dstu(std::ostream& outs) const
 {
-    std::cout << "The student name is: " << theDomStudent.getFirstName() << Student.getLastName();
+    std::cout << "The student name is: " << getFirstName() << getLastName();
     std::cout << "\nThe student is from: " << get_Province();
-    std::cout << "\nThe CGPA is: " << theDomStudent.getCGPA();
-    std::cout << "\nThe Reseach Score is: " << theDomStudent.getRScore();
-    std::cout << "\nThe student ID is: " << theDomStudent.getid()<< "\n";
+    std::cout << "\nThe CGPA is: " << getCGPA();
+    std::cout << "\nThe Reseach Score is: " << getRScore();
+    std::cout << "\nThe student ID is: " << getid()<< "\n";
 }
 std::ostream& operator <<(std::ostream& outs, const DomesticStudent& theDomStudent)
 {
