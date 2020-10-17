@@ -51,7 +51,7 @@ class DomesticStudent : public Student{
         DomesticStudent(string FName, string LName, int id, string Prov);
         DomesticStudent();
         string get_Province();
-        void dstu(std::ostream& outs) const;
+        friend void dstu(std::ostream& outs, Student theStudent) const;
         void set_Province(string Prov);
     friend std::ostream& operator <<(std::ostream& outs, const DomesticStudent& theDomStudent);
 
@@ -70,7 +70,7 @@ class InternationalStudent : public Student{
           
         void set_Country(string Con);
         void set_TOEFLScore(int TOEFL);
-        void istu(std::ostream& outs) const;
+        friend void istu(std::ostream& outs, Student theStudent) const;
 
         friend std::ostream& operator <<(std::ostream& outs, const InternationalStudent& theIntStudent);
     private:

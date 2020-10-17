@@ -132,13 +132,13 @@ DomesticStudent::DomesticStudent(){
 string DomesticStudent::get_Province()
 {return Province;}
 
-void DomesticStudent::dstu(std::ostream& outs) const
+void DomesticStudent::dstu(std::ostream& outs, Student theStudent) const
 {
-    std::cout << "The student name is: " << getFirstName() << getLastName();
+    std::cout << "The student name is: " << theStudent.getFirstName() << theStudent.getLastName();
     std::cout << "\nThe student is from: " << get_Province();
-    std::cout << "\nThe CGPA is: " << getCGPA();
-    std::cout << "\nThe Reseach Score is: " << getRScore();
-    std::cout << "\nThe student ID is: " << getid()<< "\n";
+    std::cout << "\nThe CGPA is: " << theStudent.getCGPA();
+    std::cout << "\nThe Reseach Score is: " << theStudent.getRScore();
+    std::cout << "\nThe student ID is: " << theStudent.getid()<< "\n";
 }
 std::ostream& operator <<(std::ostream& outs, const DomesticStudent& theDomStudent)
 {
@@ -163,13 +163,13 @@ InternationalStudent::InternationalStudent(){
 string InternationalStudent::get_Country()
 { return Country;}
 
-void InternationalStudent::istu(std::ostream& outs) const
+void InternationalStudent::istu(std::ostream& outs, Student theStudent) const
 {
-    std::cout << "The student name is: " << getFirstName() << getLastName();
+    std::cout << "The student name is: " << theStudent.getFirstName() << theStudent.getLastName();
     std::cout << "\nThey are from: " << get_Country();
-    std::cout << "\nThe CGPA is: " << getCGPA();
-    std::cout << "\nThe Reseach Score is: " << getRScore();
-    std::cout << "\nThe student ID is: " << getid();
+    std::cout << "\nThe CGPA is: " << theStudent.getCGPA();
+    std::cout << "\nThe Reseach Score is: " << theStudent.getRScore();
+    std::cout << "\nThe student ID is: " << theStudent.getid();
     std::cout << "\nThe student TOEFL score is: \nReading:" << ToeflScore.getReading() << "/30";
     std::cout << "\nListening:" << ToeflScore.getListening() << "/30" << "\nSpeaking: " << ToeflScore.getSpeaking() << "/30" << "\nWriting: " << ToeflScore.getWriting();
 }
