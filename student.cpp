@@ -165,11 +165,11 @@ string InternationalStudent::get_Country()
 
 void InternationalStudent::istu(std::ostream& outs) const
 {
-    std::cout << "The student name is: " << theIntStudent.getFirstName() << theIntStudent.getLastName();
+    std::cout << "The student name is: " << getFirstName() << getLastName();
     std::cout << "\nThey are from: " << get_Country();
-    std::cout << "\nThe CGPA is: " << theIntStudent.getCGPA();
-    std::cout << "\nThe Reseach Score is: " << theIntStudent.getRScore();
-    std::cout << "\nThe student ID is: " << theIntStudent.getid();
+    std::cout << "\nThe CGPA is: " << getCGPA();
+    std::cout << "\nThe Reseach Score is: " << getRScore();
+    std::cout << "\nThe student ID is: " << getid();
     std::cout << "\nThe student TOEFL score is: \nReading:" << ToeflScore.getReading() << "/30";
     std::cout << "\nListening:" << ToeflScore.getListening() << "/30" << "\nSpeaking: " << ToeflScore.getSpeaking() << "/30" << "\nWriting: " << ToeflScore.getWriting();
 }
