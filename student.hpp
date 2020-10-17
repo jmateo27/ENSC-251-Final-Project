@@ -67,4 +67,21 @@ class InternationalStudent : public Student{
         string Country;
         int TOEFLScore;
 };
+
+class ToeflScore{
+    public:
+        ToeflScore(int read, int listen, int speak, int write);
+        ToeflScore();
+        //set
+        void setReading(int read);
+        void setListening(int listen);
+        void setSpeaking(int speak);
+        void setWriting(int write);
+        //get
+        int getTOEFL();
+
+    private:
+        int reading, listening, speaking, writing, TOEFL;
+
+};
 #endif //STUDENT_H

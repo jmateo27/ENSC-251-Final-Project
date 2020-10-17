@@ -1,5 +1,6 @@
 //student.cpp to implement your classes
 #include "student.hpp"
+#include <iostream>
 
 //constructs
 Student::Student(string FName, string LName, float grade, int RScore, int id){
@@ -119,5 +120,35 @@ InternationalStudent::InternationalStudent(){
     //default constructor
 }
 
+ToeflScore::ToeflScore(int read, int listen, int speak, int write){
+    reading = read;
+    listening = listen;
+    speaking = speak;
+    writing = write;
+}
 
+ToeflScore::ToeflScore(){
+    //default constructor
+}
+//set functions for Toefl
+void ToeflScore::setReading(int read){
+    reading = read;
+}
 
+void ToeflScore::setListening(int listen){
+    listening = listen;
+}
+
+void ToeflScore::setSpeaking(int speak){
+    speaking = speak;
+}
+
+void ToeflScore::setWriting(int write){
+    writing = write;
+}
+
+//Total score
+int ToeflScore::getTOEFL(){
+    TOEFL = (reading + listening + speaking + writing);
+    return TOEFL;
+}
