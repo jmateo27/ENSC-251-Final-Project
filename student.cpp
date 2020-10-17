@@ -163,7 +163,7 @@ InternationalStudent::InternationalStudent(){
 string InternationalStudent::get_Country()
 { return Country;}
 
-void InternationalStudent::istru(std::ostream& outs) const
+void InternationalStudent::istu(std::ostream& outs) const
 {
     std::cout << "The student name is: " << theIntStudent.getFirstName() << theIntStudent.getLastName();
     std::cout << "\nThey are from: " << get_Country();
