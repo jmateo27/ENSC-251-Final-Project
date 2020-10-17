@@ -4,16 +4,16 @@
 
 //constructs
 Student::Student(string FName, string LName, float grade, int RScore, int id){
-    FirstName = FName + ","; 
-    LastName = LName + ","; 
+    FirstName = FName; 
+    LastName = LName; 
     CGPA = grade; 
     ResearchScore = RScore; 
     AppID = id; 
 }
 
 Student::Student(string FName, string LName, int id){
-    FirstName = FName + ","; 
-    LastName = LName + ","; 
+    FirstName = FName; 
+    LastName = LName; 
     AppID = id; 
 }
 
@@ -23,11 +23,11 @@ Student::Student(){
 
 //set functions 
 void Student::setFirstName(string FName){
-    FirstName = FName + ","; 
+    FirstName = FName; 
 }
 
 void Student::setLastName(string LName){
-    LastName = LName + ",";
+    LastName = LName;
 }
 
 void Student::setCGPA(float grade){
@@ -76,19 +76,28 @@ int compareCGPA(Student student1, Student student2){
 }
 
 int compareFirstName (Student student1, Student student2){
-    //if (student1.getFirstName() 
-}
+    std::string s1 = student1.getFirstName();
+    std::string s2 = student2.getFirstName(); 
+    unsigned int len1 = s1.length(); 
+    unsigned int len2 = s2.length(); 
+    unsigned int len =0; 
 
-unsigned int findlen(Student student1, Student student2){
-    string name1 = student1.getFirstName();
-    string name2 = student2.getFirstName();
-    unsigned int i = 0;
-    while (name1[i] != (char)"," || name2[i] != (char)","){
-        i++;
+    if (len1 >= len2 )
+        len = len1; 
+    else
+        len = len2; 
+        
+    for(int i = 0; i < len; i++){
+        if (s1[i] == s2[i])
+            continue; 
+        else if (s1[i] > s2[i])
+            return 0; 
+        else  //s1 < s2
+            return 1; 
     }
-
-    return i;
 }
+}
+
 
 DomesticStudent::DomesticStudent(string FName, string LName, float grade, int RScore, int id, string Prov): 
     Student(FName, LName, grade, RScore, id){//Takes info from student class
