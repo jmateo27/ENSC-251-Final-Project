@@ -132,7 +132,7 @@ DomesticStudent::DomesticStudent(){
 string DomesticStudent::get_Province()
 {return Province;}
 
-void dstu(std::ostream& outs) const
+void DomesticStudent::dstu(std::ostream& outs) const
 {
     std::cout << "The student name is: " << theDomStudent.getFirstName() << Student.getLastName();
     std::cout << "\nThe student is from: " << get_Province();
@@ -160,12 +160,12 @@ InternationalStudent::InternationalStudent(string FName, string LName, int id, s
 InternationalStudent::InternationalStudent(){
     //default constructor
 }
-string InternationStudent::get_Country()
+string InternationalStudent::get_Country()
 { return Country;}
 
-void istru(std::ostream& outs) const
+void InternationalStudent::istru(std::ostream& outs) const
 {
-    std::cout << "The student name is: " << theIntStudent.getFirstName() << Student.getLastName();
+    std::cout << "The student name is: " << theIntStudent.getFirstName() << theIntStudent.getLastName();
     std::cout << "\nThey are from: " << get_Country();
     std::cout << "\nThe CGPA is: " << theIntStudent.getCGPA();
     std::cout << "\nThe Reseach Score is: " << theIntStudent.getRScore();
