@@ -119,7 +119,7 @@ string DomesticStudent::get_Province()
 std::ostream& operator <<(std::ostream& outs, const DomesticStudent& theDomStudent)
 {
     std::cout << "The student name is: " << Student.getFirstName() << Student.getLastName();
-    std::cout << "\The student is from: " << get_Province();
+    std::cout << "\nThe student is from: " << get_Province();
     std::cout << "\nThe CGPA is: " << Student.getCGPA();
     std::cout << "\nThe Reseach Score is: " << Student.getRScore();
     std::cout << "\nThe student ID is: " << Student.getid()<< "\n";
@@ -143,7 +143,7 @@ InternationalStudent::InternationalStudent(){
 string InternationStudent::get_Country()
 { return Country;}
 
-std::ostream& operator <<(std::ostream& outs, const InternationStudent& theIntStudent)
+std::ostream& operator <<(std::ostream& outs, const InternationalStudent& theIntStudent)
 {
     std::cout << "The student name is: " << Student.getFirstName() << Student.getLastName();
     std::cout << "\nThey are from: " << get_Country();
