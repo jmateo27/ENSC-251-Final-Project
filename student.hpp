@@ -32,7 +32,7 @@ class Student{
         friend int compareResearchScore(Student student1, Student student2);
         friend int compareFirstName(Student student1, Student student2);
         friend int compareLastName(Student student1, Student student2);
-
+        friend std::ostream& operator <<(std::ostream& outs, const Student& theStudent);
         //extra stuff
         friend unsigned int findlen(std::string student1, std::string student2); 
 
@@ -42,42 +42,6 @@ class Student{
         float CGPA;
         int ResearchScore;
         int AppID; //just four digits
-};
-
-class DomesticStudent : public Student{
-//child class of the Student class
-    public:
-        DomesticStudent(std::string FName, std::string LName, float grade, int RScore, int id, std::string Prov);
-        DomesticStudent(std::string FName, std::string LName, int id, std::string Prov);
-        DomesticStudent();
-        std::string get_Province() const;
-        void dstu(std::ostream& outs) const;
-        void set_Province(std::string Prov);
-    friend std::ostream& operator <<(std::ostream& outs, const DomesticStudent& theDomStudent);
-
-    // friend operator << (string FName, string LName, float grade, int RScore, int id, string Prov);
-    private:
-        std::string Province;
-};
-
-class InternationalStudent : public Student{
-//child class of the Student class
-    public:
-        InternationalStudent(std::string FName, std::string LName, float grade, int RScore, int id, std::string Con, int TOEFL);
-        InternationalStudent(std::string FName, std::string LName, int id, std::string Con, int TOEFL);
-        InternationalStudent();
-        std::string get_Country( const;
-        ToeflScore getToefl() const;
-        void set_toefl(ToeflScore thescore);
-        void set_Country(std::string Con);
-        void set_TOEFLScore(int TOEFL);
-        void istu(std::ostream& outs) const;
-        
-        friend std::ostream& operator <<(std::ostream& outs, const InternationalStudent& theIntStudent);
-    private:
-        std::string Country;
-        int TOEFLScore;
-        ToeflScore theirscore;
 };
 
 class ToeflScore{
@@ -100,6 +64,41 @@ class ToeflScore{
         int reading, listening, speaking, writing, TOEFL;
 
 };
+
+class DomesticStudent : public Student{
+//child class of the Student class
+    public:
+        DomesticStudent(std::string FName, std::string LName, float grade, int RScore, int id, std::string Prov);
+        DomesticStudent(std::string FName, std::string LName, int id, std::string Prov);
+        DomesticStudent();
+        std::string getProvince() const;
+        
+        void set_Province(std::string Prov);
+    friend std::ostream& operator <<(std::ostream& outs, const DomesticStudent& theDomStudent);
+
+    // friend operator << (string FName, string LName, float grade, int RScore, int id, string Prov);
+    private:
+        std::string Province;
+};
+
+class InternationalStudent : public Student{
+//child class of the Student class
+    public:
+        InternationalStudent(std::string FName, std::string LName, float grade, int RScore, int id, std::string Con, ToeflScore toefl);
+        InternationalStudent(std::string FName, std::string LName, int id, std::string Con, ToeflScore toefl);
+        InternationalStudent();
+        std::string getCountry() const;
+        ToeflScore getToefl() const;
+        void settoefl(ToeflScore thescore);
+        void setCountry(std::string Con);
+        
+        friend std::ostream& operator <<(std::ostream& outs, const InternationalStudent& theIntStudent);
+    private:
+        std::string Country;
+        ToeflScore theirscore;
+};
+
 #endif //STUDENT_H
 
 char upper2lowercase(char c);
+void formatID(std::ostream& outs, const int num);
