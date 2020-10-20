@@ -78,6 +78,19 @@ std::ostream& operator <<(std::ostream& outs, const Student& theStudent)
 
 
 //compare functions
+int compareResearchScore(Student student1, Student student2){
+    int rscore1 = student1.getRScore(); 
+    int rscore2 = student2.getRScore(); 
+
+    if (rscore1 == rscore2)
+        return 0;
+    else if (rscore1 > rscore2)
+        return 1;
+    else // rscore1 < rscore2
+        return -1;
+    
+}
+
 int compareCGPA(Student student1, Student student2){
     float CGPA1 = student1.getCGPA();
     float CGPA2 = student2.getCGPA();
@@ -268,4 +281,8 @@ void formatID(std::ostream& outs, const int num) {
         i--;
     } 
     outs << num;
+}
+
+char giveback(std::string student, int n ){
+  return student[n];
 }

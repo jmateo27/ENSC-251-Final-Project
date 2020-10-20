@@ -33,8 +33,7 @@ class Student{
         friend int compareFirstName(Student student1, Student student2);
         friend int compareLastName(Student student1, Student student2);
         friend std::ostream& operator <<(std::ostream& outs, const Student& theStudent);
-        //extra stuff
-        friend unsigned int findlen(std::string student1, std::string student2); 
+         
 
     private:
         std::string FirstName;
@@ -102,3 +101,4 @@ class InternationalStudent : public Student{
 
 char upper2lowercase(char c);
 void formatID(std::ostream& outs, const int num);
+char giveback(std::string student, int n );
