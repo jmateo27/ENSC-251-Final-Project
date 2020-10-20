@@ -3,30 +3,23 @@
 #include <iostream>
 
 //constructs
-Student::Student(string FName, string LName, float grade, int RScore, int id){
-    FirstName = FName; 
-    LastName = LName; 
-    CGPA = grade; 
-    ResearchScore = RScore; 
-    AppID = id; 
+Student::Student(std::string FName, std::string LName, float grade, int RScore, int id)
+    : FirstName(FName), LastName(LName), CGPA(grade), ResearchScore(RScore), AppID(id){
 }
 
-Student::Student(string FName, string LName, int id){
-    FirstName = FName; 
-    LastName = LName; 
-    AppID = id; 
+Student::Student(std::string FName, std::string LName, int id)
+    : FirstName(FName), LastName(LName), AppID(id){
 }
 
-Student::Student(){
-    //default constructor
-}
+Student::Student() //default constructor
+{}
 
 //set functions 
-void Student::setFirstName(string FName){
-    FirstName = FName; 
+void Student::setFirstName(std::string FName){
+    FirstName = FName;
 }
 
-void Student::setLastName(string LName){
+void Student::setLastName(std::string LName){
     LastName = LName;
 }
 
@@ -43,23 +36,23 @@ void Student::setAppID(int id){
 }
 
 //getfunctions
-string Student::getFirstName(){
+std::string Student::getFirstName() const{
     return FirstName; 
 }
 
-std::string Student::getLastName(){
+std::string Student::getLastName() const{
     return LastName; 
 }
 
-float Student::getCGPA(){
+float Student::getCGPA() const{
     return CGPA; 
 }
 
-int Student::getRScore(){
+int Student::getRScore() const{
     return ResearchScore; 
 }
 
-int Student::getid(){
+int Student::getid() const{
     return AppID;
 }
 
@@ -115,61 +108,67 @@ int compareLastName (Student student1, Student student2){
 }
 
 
-DomesticStudent::DomesticStudent(string FName, string LName, float grade, int RScore, int id, string Prov): 
-    Student(FName, LName, grade, RScore, id){//Takes info from student class
-        Province = Prov;
-    }
-
-DomesticStudent::DomesticStudent(string FName, string LName, int id, string Prov):
-    Student(FName, LName, id){//Takes info from student class
-        Province = Prov;
-    }
-
-DomesticStudent::DomesticStudent(){
-    //default constructor
+DomesticStudent::DomesticStudent(std::string FName, std::string LName, float grade, int RScore, int id, std::string Prov)
+    : Student(FName, LName, grade, RScore, id), Province(Prov){//Takes info from student class
 }
 
-string DomesticStudent::get_Province()
-{return Province;}
+DomesticStudent::DomesticStudent(std::string FName, std::string LName, int id, std::string Prov):
+    Student(FName, LName, id), Province(Prov){//Takes info from student class
+}
 
-void DomesticStudent::dstu(std::ostream& outs, DomesticStudent theStudent) const
+DomesticStudent::DomesticStudent() //default constructor
+{}
+
+std::string DomesticStudent::get_Province() const{
+    return Province;
+}
+
+void DomesticStudent::dstu(std::ostream& outs) const
 {
-    std::cout << "The student name is: " << theStudent.getFirstName() << theStudent.getLastName();
+    std::cout << "The student name is: " << getFirstName() << getLastName();
     std::cout << "\nThe student is from: " << get_Province();
-    std::cout << "\nThe CGPA is: " << theStudent.getCGPA();
-    std::cout << "\nThe Reseach Score is: " << theStudent.getRScore();
-    std::cout << "\nThe student ID is: " << theStudent.getid()<< "\n";
+    std::cout << "\nThe CGPA is: " << getCGPA();
+    std::cout << "\nThe Reseach Score is: " << getRScore();
+    std::cout << "\nThe student ID is: " << getid()<< "\n";
 }
 std::ostream& operator <<(std::ostream& outs, const DomesticStudent& theDomStudent)
 {
     theDomStudent.dstu(outs);
 }
 
-InternationalStudent::InternationalStudent(string FName, string LName, float grade, int RScore, int id, string Con, int TOEFL):
-    Student(FName, LName, grade, RScore, id){
-            Country = Con;
-            TOEFLScore = TOEFL;
-    }
-
-InternationalStudent::InternationalStudent(string FName, string LName, int id, string Con, int TOEFL) :
-    Student(FName, LName, id){
-            Country = Con;
-            TOEFLScore = TOEFL;
-    }
-
-InternationalStudent::InternationalStudent(){
-    //default constructor
+InternationalStudent::InternationalStudent(std::string FName, std::string LName, float grade, int RScore, int id, std::string Con, int TOEFL)
+    : Student(FName, LName, grade, RScore, id), Country(Con), TOEFLScore(TOEFL){
 }
-string InternationalStudent::get_Country()
-{ return Country;}
+
+InternationalStudent::InternationalStudent(std::string FName, std::string LName, int id, std::string Con, int TOEFL) :
+    Student(FName, LName, id), Country(Con), TOEFLScore(TOEFL){
+}
+
+InternationalStudent::InternationalStudent() //default constructor
+{}
+    
+
+
+std::string InternationalStudent::get_Country() const{ 
+    return Country;
+}
+
+ToeflScore InternationalStudent::getToefl() const{
+    return theirscore;
+}
+
+void InternationalStudent::set_toefl(ToeflScore thescore){
+    theirscore = thescore;
+}
 
 void InternationalStudent::istu(std::ostream& outs, InternationalStudent theStudent) const
 {
-    std::cout << "The student name is: " << theStudent.getFirstName() << theStudent.getLastName();
+    ToeflScore thescore = getToefl();
+    std::cout << "The student name is: " << getFirstName() << getLastName();
     std::cout << "\nThey are from: " << get_Country();
-    std::cout << "\nThe CGPA is: " << theStudent.getCGPA();
-    std::cout << "\nThe Reseach Score is: " << theStudent.getRScore();
-    std::cout << "\nThe student ID is: " << theStudent.getid();
+    std::cout << "\nThe CGPA is: " << getCGPA();
+    std::cout << "\nThe Reseach Score is: " << getRScore();
+    std::cout << "\nThe student ID is: " << getid();
     std::cout << "\nThe student TOEFL score is: \nReading:" << ToeflScore.getReading() << "/30";
     std::cout << "\nListening:" << ToeflScore.getListening() << "/30" << "\nSpeaking: " << ToeflScore.getSpeaking() << "/30" << "\nWriting: " << ToeflScore.getWriting();
 }
@@ -179,17 +178,13 @@ std::ostream& operator <<(std::ostream& outs, const InternationalStudent& theInt
     theIntStudent.istu(outs);
 }
 
-ToeflScore::ToeflScore(int read, int listen, int speak, int write){
-    reading = read;
-    listening = listen;
-    speaking = speak;
-    writing = write;
+ToeflScore::ToeflScore(int read, int listen, int speak, int write)
+    : reading(read), listening(listen), speaking(speak), writing(write){
 }
 
-ToeflScore::ToeflScore(){
-    //default constructor
-}
-
+ToeflScore::ToeflScore() //default constructor
+{}
+   
 //set functions for Toefl
 void ToeflScore::setReading(int read){
     reading = read;
@@ -207,22 +202,25 @@ void ToeflScore::setWriting(int write){
     writing = write;
 }
 
-int ToeflScore::getReading()
-{ return reading;}
+int ToeflScore::getReading() const{
+     return reading;
+}
 
-int ToeflScore::getListening()
-{ return listening;}
+int ToeflScore::getListening() const{
+    return listening;
+}
 
-int ToeflScore::getSpeaking()
-{ return speaking;}
+int ToeflScore::getSpeaking() const{
+    return speaking;
+}
 
-int ToeflScore::getWriting()
-{ return writing;}
+int ToeflScore::getWriting() const{
+    return writing;
+}
 
 //Total score
-int ToeflScore::getTOEFL(){
-    TOEFL = (reading + listening + speaking + writing);
-    return TOEFL;
+int ToeflScore::getTOEFL() const{
+    return (reading + listening + speaking + writing);
 }
 
 char upper2lowercase(char c){

@@ -9,23 +9,23 @@ class Student{
     public:
 
         //constructs
-        Student(string FName, string LName, float grade, int RScore, int id);
-        Student(string FName, string LName, int id);
+        Student(std::string FName, std::string LName, float grade, int RScore, int id);
+        Student(std::string FName, std::string LName, int id);
         Student();
 
         //set functions
-        void setFirstName(string FName);
-        void setLastName(string LName);
+        void setFirstName(std::string FName);
+        void setLastName(std::string LName);
         void setCGPA(float grade);
         void setResearchScore(int RScore);
         void setAppID(int id);
 
         //get functions 
-        string getFirstName(); 
-        string getLastName(); 
-        float getCGPA(); 
-        int getRScore(); 
-        int getid(); 
+        std::string getFirstName() const; 
+        std::string getLastName() const; 
+        float getCGPA() const; 
+        int getRScore() const; 
+        int getid() const; 
 
         //compare functions
         friend int compareCGPA(Student student1, Student student2);
@@ -34,11 +34,11 @@ class Student{
         friend int compareLastName(Student student1, Student student2);
 
         //extra stuff
-        friend unsigned int findlen(string student1, string student2); 
+        friend unsigned int findlen(std::string student1, std::string student2); 
 
     private:
-        string FirstName;
-        string LastName;
+        std::string FirstName;
+        std::string LastName;
         float CGPA;
         int ResearchScore;
         int AppID; //just four digits
@@ -47,35 +47,37 @@ class Student{
 class DomesticStudent : public Student{
 //child class of the Student class
     public:
-        DomesticStudent(string FName, string LName, float grade, int RScore, int id, string Prov);
-        DomesticStudent(string FName, string LName, int id, string Prov);
+        DomesticStudent(std::string FName, std::string LName, float grade, int RScore, int id, std::string Prov);
+        DomesticStudent(std::string FName, std::string LName, int id, std::string Prov);
         DomesticStudent();
-        string get_Province();
-        friend void dstu(std::ostream& outs, DomesticStudent theStudent) const;
-        void set_Province(string Prov);
+        std::string get_Province() const;
+        void dstu(std::ostream& outs) const;
+        void set_Province(std::string Prov);
     friend std::ostream& operator <<(std::ostream& outs, const DomesticStudent& theDomStudent);
 
     // friend operator << (string FName, string LName, float grade, int RScore, int id, string Prov);
     private:
-        string Province;
+        std::string Province;
 };
 
 class InternationalStudent : public Student{
 //child class of the Student class
     public:
-        InternationalStudent(string FName, string LName, float grade, int RScore, int id, string Con, int TOEFL);
-        InternationalStudent(string FName, string LName, int id, string Con, int TOEFL);
+        InternationalStudent(std::string FName, std::string LName, float grade, int RScore, int id, std::string Con, int TOEFL);
+        InternationalStudent(std::string FName, std::string LName, int id, std::string Con, int TOEFL);
         InternationalStudent();
-        string get_Country();
-          
-        void set_Country(string Con);
+        std::string get_Country( const;
+        ToeflScore getToefl() const;
+        void set_toefl(ToeflScore thescore);
+        void set_Country(std::string Con);
         void set_TOEFLScore(int TOEFL);
-        friend void istu(std::ostream& outs, InternationalStudent theStudent) const;
-
+        void istu(std::ostream& outs) const;
+        
         friend std::ostream& operator <<(std::ostream& outs, const InternationalStudent& theIntStudent);
     private:
-        string Country;
+        std::string Country;
         int TOEFLScore;
+        ToeflScore theirscore;
 };
 
 class ToeflScore{
@@ -88,12 +90,11 @@ class ToeflScore{
         void setSpeaking(int speak);
         void setWriting(int write);
         //get
-        int getReading();
-        int getListening();
-        int getSpeaking();
-        int getWriting();
-        int getTOEFL();
-        
+        int getReading() const;
+        int getListening() const;
+        int getSpeaking() const;
+        int getWriting() const;
+        int getTOEFL() const;
 
     private:
         int reading, listening, speaking, writing, TOEFL;
