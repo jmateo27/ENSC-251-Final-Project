@@ -105,7 +105,91 @@ int main(){
 
   delete [] domstu; 
   //close your file
+<<<<<<< HEAD
   domesticFile2.close();
+=======
+  domesticFile.close();
+----------
+    Student theStudent;
+    DomesticStudent domStudent;
+    InternationalStudent intStudent;
+    ToeflScore toefl;
+    char intstate, domstate, state, dinp, iinp, inp;
+    do{
+    state = 'i';
+        std::cout << "Welcome to the Graduate Student Admission System\n";
+        << "Today we will be facilitating your admission inquiry needs\n";
+        << "First please enter which applicant list of students to check \nInternational (I) or Domestic (D): \n";
+        std::cin >> state;  // user inputs the list of students due
+    switch(state){
+    case I :
+        do{
+        std::cout << "You have entered the International Student Applicants list\n";
+            << "Please choose from the following options:\n";
+            << "Assort students by first name (A-Z), enter (F)";
+            << "Assort students by last name (A-Z), enter (L)";
+            << "Assort students by CGPA (4.3 to 0), enter (C)";
+            << "Assort students by Research Score (100 to 0), enter (R);
+        std::cin >> intstate;
+            switch(intstate){
+            case F :
+                    
+            break;
+            case L :
+                    
+            break;
+            case C :
+                    
+            break;
+            case R :
+                    
+            break;
+            default :
+                std::cout << "Invalid entry.\n";
+        }
+        std::cout << "Would you like to check another sorting method? (y/n)\n";
+        std::cin>> iinp;
+            
+        } while (iinp != "n" || iinp != "N")
+        break;
+    case D :
+        do{
+        std::cout << "You have entered the Domestic Student Applicants list\n";
+            << "Please choose from the following options:\n";
+            << "Assort students by first name (A-Z), enter (F)";
+            << "Assort students by last name (A-Z), enter (L)";
+            << "Assort students by CGPA (4.3 to 0), enter (C)";
+            << "Assort students by Research Score (100 to 0), enter (R);
+        std::cin >> domstate;
+            switch(domstate){
+            case F :
+                    
+            break;
+            case L :
+                    
+            break;
+            case C :
+                    
+            break;
+            case R :
+                    
+            break;
+            default :
+                std::cout << "Invalid entry.\n";
+            }
+        std::cout << "Would you like to check another sorting method? (y/n)\n";
+        std::cin>> dinp;
+                
+        } while (dinp != "n" || dinp != "N")
+                
+    }
+    default :
+        std::cout << "Invalid entry.\n";
+    }
+    std::cout << "Would you like to check another list of students? (y/n) \n";
+    std::cin >> inp;
+} while (inp != "n" || inp != "n")
+>>>>>>> 10a10bc48d487877549eb7e23cd48f9aec9d735e
 
   return 0;
 }
