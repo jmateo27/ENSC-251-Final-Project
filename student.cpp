@@ -157,6 +157,10 @@ std::string DomesticStudent::getProvince() const{
     return Province;
 }
 
+void DomesticStudent::setProvince(std::string Prov){
+  Province = Prov; 
+}
+
 std::ostream& operator <<(std::ostream& outs, const DomesticStudent& theDomStudent)
 {
     outs << "The domestic student's name is: " << theDomStudent.getFirstName() << " " << theDomStudent.getLastName();

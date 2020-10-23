@@ -72,7 +72,7 @@ class DomesticStudent : public Student{
         DomesticStudent();
         std::string getProvince() const;
         
-        void set_Province(std::string Prov);
+        void setProvince(std::string Prov);
     friend std::ostream& operator <<(std::ostream& outs, const DomesticStudent& theDomStudent);
 
     // friend operator << (string FName, string LName, float grade, int RScore, int id, string Prov);

@@ -4,6 +4,7 @@
 #include <fstream> //file processing
 #include <sstream> //formatted string processing
 #include <cstdlib> //atof and atoi
+
 #include "student.hpp"
 
 /*I provide example code here to help you read the input
@@ -13,7 +14,9 @@
 int main(){
   //Read the domestic-stu.txt file and exit if failed
   string line;
+  char temp; 
   ifstream domesticFile("domestic-stu.txt");
+  
   if(!domesticFile.is_open()) {
     cout << "Unable to open file domestic-stu.txt" << endl;
     return -1;
@@ -22,7 +25,7 @@ int main(){
   //Read the first line of domestic-stu.txt, which specifies
   //the file format. And then print it out to the screen
   getline(domesticFile, line);
-  cout << "File format: " << line << endl;
+//  cout << "File format: " << line << endl;
 
   /*Keep reading the rest of the lines in domestic-stu.txt.
    *In the example code here, I will read each data separated
@@ -33,13 +36,29 @@ int main(){
    *print the object content to the screen
    */
   int stu_count = 1;
-  while( getline(domesticFile, line) ) {
-    /*process each line, get each field separated by a comma.
+
+  int lines = 0; 
+  while(getline(domesticFile, line)){
+    lines++; 
+  }
+  domesticFile.close();
+  ifstream domesticFile2("domestic-stu.txt");
+  DomesticStudent *domstu; 
+  domstu = new DomesticStudent[lines];
+
+
+  getline(domesticFile2, line);
+  std::cout << lines << "\n" << line << "\n";
+  
+
+  while( getline(domesticFile2, line) ) {
+   // arrDom = new DomesticStudent[1];
+    /* process each line, get each field separated by a comma.
      *We use istringstream to handle it.
      *Note in this example code here, we assume the file format
      *is perfect and do NOT handle error cases. We will leave the
      *error and exception handling of file format to Lab Assignment 4
-     */
+     */ 
     istringstream ss(line);
 
     string firstName, lastName, province, s_cgpa, s_researchScore;
@@ -64,15 +83,29 @@ int main(){
     researchScore = atoi(s_researchScore.c_str());
 
     //print the student info to the screen
-    cout << "Domestic student " << stu_count << " " << firstName << " " 
+     cout << "Domestic student " << stu_count << " " << firstName << " " 
 	 << lastName << " from " << province << " province has cgpa of "
 	 << cgpa << ", and research score of " << researchScore << endl;
+   
 
-    stu_count++;
+ DomesticStudent *temp = domstu + stu_count - 1;
+
+  temp->setFirstName(firstName);
+  temp->setLastName(lastName);
+  temp->setCGPA(cgpa);
+  temp->setResearchScore(researchScore);
+  temp->setAppID(stu_count);
+  temp->setProvince(province);
+
+  //std::cout << *temp << std::endl;
+
+  stu_count++;
+  
   }
 
+  delete [] domstu; 
   //close your file
-  domesticFile.close();
+  domesticFile2.close();
 
   return 0;
 }
