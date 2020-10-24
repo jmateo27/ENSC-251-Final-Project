@@ -1,9 +1,6 @@
 //main.cpp, put your driver code here, 
 //you can manipulate your class objects here
 #include <iostream> //cin and cout
-#include <fstream> //file processing
-#include <sstream> //formatted string processing
-#include <cstdlib> //atof and atoi
 
 #include "student.hpp"
 
@@ -13,13 +10,17 @@
  */
 int main(){
   /////////////////////////////////////////MENU/////////////////////////////////////////////////////////////
-    Student theStudent;
-    DomesticStudent domStudent;
-    InternationalStudent intStudent;
-    ToeflScore toefl;
+    int sizeD;
+    int sizeI;
+    DomesticStudent *domstu;
+    DomArray(domstu, sizeD);
+  
+    InternationalStudent *intstu;
+    InterArray(intstu, sizeI);
+
     char intstate, domstate, state, dinp, iinp, inp;
     do{
-    state = 'i';
+      state = 'i';
       std::cout << "Welcome to the Graduate Student Admission System\n"
                 << "Today we will be facilitating your admission inquiry needs\n"
                 << "First please enter which applicant list of students to check \nInternational (I) or Domestic (D): \n";
@@ -27,49 +28,50 @@ int main(){
     switch(state){
     case 'I':
       do{
-      std::cout << "You have entered the International Student Applicants list\n"
-                << "Please choose from the following options:\n"
-                << "Assort students by first name (A-Z), enter (F)\n"
-                << "Assort students by last name (A-Z), enter (L)\n"
-                << "Assort students by CGPA (4.3 to 0), enter (C)\n"
-                << "Assort students by Research Score (100 to 0), enter (R)\n"
-                << "Assort students starting from Research Score, then CGPA, then Country (E)\n";
-                
-      std::cin >> intstate;
-        switch(intstate){
-        case 'F':
-                
-        break;
-        case 'L':
-                
-        break;
-        case 'C':
-                
-        break;
-        case 'R':
-                
-        break;
-        case 'E':
-                
-        break;
-        default :
-          std::cout << "Invalid entry.\n";
-        }
-        std::cout << "Would you like to check another sorting method? (y/n)\n";
-        std::cin>> iinp;
+        std::cout << "You have entered the International Student Applicants list\n"
+                  << "Please choose from the following options:\n"
+                  << "Assort students by first name (A-Z), enter (F)\n"
+                  << "Assort students by last name (A-Z), enter (L)\n"
+                  << "Assort students by CGPA (4.3 to 0), enter (C)\n"
+                  << "Assort students by Research Score (100 to 0), enter (R)\n"
+                  << "Assort students starting from Research Score, then CGPA, then Country (E)\n";
+                  
+        std::cin >> intstate;
+          switch(intstate){
+          case 'F':
+                  
+            break;
+          case 'L':
+                  
+            break;
+          case 'C':
+                  
+            break;
+          case 'R':
+                  
+            break;
+          case 'E':
+                  
+            break;
+          default :
+            std::cout << "Invalid entry.\n";
+          }
+
+          std::cout << "Would you like to check another sorting method? (y/n)\n";
+          std::cin>> iinp;
             
         } while (iinp != 'n' || iinp != 'N');
         break;
     case 'D':
         do{
-        std::cout << "You have entered the Domestic Student Applicants list\n"
+          std::cout << "You have entered the Domestic Student Applicants list\n"
                   << "Please choose from the following options:\n"
                   << "Assort students by first name (A-Z), enter (F)\n"
                   << "Assort students by last name (A-Z), enter (L)\n"
                   << "Assort students by CGPA (4.3 to 0), enter (C)\n"
                   << "Assort students by Research Score (100 to 0), enter (R)\n"
                   << "Assort students starting from Research Score, then CGPA, then Province (E)\n";
-        std::cin >> domstate;
+          std::cin >> domstate;
           switch(domstate){
           case 'F':
                   
@@ -99,103 +101,9 @@ int main(){
     }
     std::cout << "Would you like to check another list of students? (y/n) \n";
     std::cin >> inp;
-} while (inp != 'n' || inp != 'N');
-
-////////////////////////////////////////part 4/////////////////////////////////////////////////
-  //Read the domestic-stu.txt file and exit if failed
-  std::string line;
-  char temp; 
-  ifstream domesticFile("domestic-stu.txt");
-  
-  if(!domesticFile.is_open()) {
-    cout << "Unable to open file domestic-stu.txt" << endl;
-    return -1;
-  }
-
-  //Read the first line of domestic-stu.txt, which specifies
-  //the file format. And then print it out to the screen
-  getline(domesticFile, line);
-//  cout << "File format: " << line << endl;
-
-  /*Keep reading the rest of the lines in domestic-stu.txt.
-   *In the example code here, I will read each data separated
-   *by a comma, and then print it out to the screen.
-   *In your lab assignment 1, you should use these read data
-   *to initialize your DomesticStudent object. Then you can
-   *use get and set functions to manipulate your object, and
-   *print the object content to the screen
-   */
-  int stu_count = 1;
-
-  int lines = 0; 
-  while(getline(domesticFile, line)){
-    lines++; 
-  }
-  domesticFile.close();
-  ifstream domesticFile2("domestic-stu.txt");
-  DomesticStudent *domstu; 
-  domstu = new DomesticStudent[lines];
-
-
-  getline(domesticFile2, line);
-  std::cout << lines << "\n" << line << "\n";
-  
-
-  while( getline(domesticFile2, line) ) {
-   // arrDom = new DomesticStudent[1];
-    /* process each line, get each field separated by a comma.
-     *We use istringstream to handle it.
-     *Note in this example code here, we assume the file format
-     *is perfect and do NOT handle error cases. We will leave the
-     *error and exception handling of file format to Lab Assignment 4
-     */ 
-    istringstream ss(line);
-
-    string firstName, lastName, province, s_cgpa, s_researchScore;
-    float cgpa;
-    int researchScore;
-
-    //get firstName separated by comma
-    getline(ss, firstName, ',');
-
-    //get lastName separated by comma
-    getline(ss, lastName, ',');
-
-    //get province separated by comma
-    getline(ss, province, ',');
-
-    //get cpga separated by comma, and convert string to float
-    getline(ss, s_cgpa, ',');
-    cgpa = atof(s_cgpa.c_str());
-    
-    //get researchScore separated by comma, and convert it to int
-    getline(ss, s_researchScore, ',');
-    researchScore = atoi(s_researchScore.c_str());
-
-    //print the student info to the screen
-     cout << "Domestic student " << stu_count << " " << firstName << " " 
-	 << lastName << " from " << province << " province has cgpa of "
-	 << cgpa << ", and research score of " << researchScore << endl;
-   
-
- DomesticStudent *temp = domstu + stu_count - 1;
-
-  temp->setFirstName(firstName);
-  temp->setLastName(lastName);
-  temp->setCGPA(cgpa);
-  temp->setResearchScore(researchScore);
-  temp->setAppID(stu_count);
-  temp->setProvince(province);
-
-  //std::cout << *temp << std::endl;
-
-  stu_count++;
-  
-  }
-
-  delete [] domstu; 
-  //close your file
-  domesticFile2.close();
-
+  } while (inp != 'n' || inp != 'N');
+//////////////////////////////ENDOFMENU//////////////////////////////////////////////////
+  delete [] domstu;
+  delete [] intstu;
   return 0;
 }

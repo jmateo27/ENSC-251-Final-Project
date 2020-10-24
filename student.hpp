@@ -3,6 +3,9 @@
 #define STUDENT_H
 using namespace std; //use namespace std
 #include <string> //you will have to use string in C++
+#include <fstream> //file processing
+#include <sstream> //formatted string processing
+#include <cstdlib> //atof and atoi
 
 class Student{
 //parent class of the DomesticStudent and InternationalStudent class
@@ -103,3 +106,7 @@ class InternationalStudent : public Student{
 char upper2lowercase(char c);
 void formatID(std::ostream& outs, const int num);
 char giveback(std::string student, int n );
+DomesticStudent* DomArray(DomesticStudent *ptr, int &size);
+InternationalStudent* InterArray(InternationalStudent *ptr, int &size);
+void getDomArray(DomesticStudent *ptr, int size);
+void getInterArray(InternationalStudent *ptr, int size);
