@@ -25,10 +25,10 @@ int main(){
                 << "First please enter which applicant list of students to check \nInternational (I) or Domestic (D): \n";
       std::cin >> state;  // user inputs the list of students due
     switch(state){
-    case I :
+    case 'I':
       do{
-      std::cout << "You have entered the International Student Applicants list\n";
-                << "Please choose from the following options:\n";
+      std::cout << "You have entered the International Student Applicants list\n"
+                << "Please choose from the following options:\n"
                 << "Assort students by first name (A-Z), enter (F)\n"
                 << "Assort students by last name (A-Z), enter (L)\n"
                 << "Assort students by CGPA (4.3 to 0), enter (C)\n"
@@ -37,19 +37,19 @@ int main(){
                 
       std::cin >> intstate;
         switch(intstate){
-        case F :
+        case 'F':
                 
         break;
-        case L :
+        case 'L':
                 
         break;
-        case C :
+        case 'C':
                 
         break;
-        case R :
+        case 'R':
                 
         break;
-        case E:
+        case 'E':
                 
         break;
         default :
@@ -58,11 +58,11 @@ int main(){
         std::cout << "Would you like to check another sorting method? (y/n)\n";
         std::cin>> iinp;
             
-        } while (iinp != "n" || iinp != "N");
+        } while (iinp != 'n' || iinp != 'N');
         break;
-    case D :
+    case 'D':
         do{
-        std::cout << "You have entered the Domestic Student Applicants list\n";
+        std::cout << "You have entered the Domestic Student Applicants list\n"
                   << "Please choose from the following options:\n"
                   << "Assort students by first name (A-Z), enter (F)\n"
                   << "Assort students by last name (A-Z), enter (L)\n"
@@ -71,19 +71,19 @@ int main(){
                   << "Assort students starting from Research Score, then CGPA, then Province (E)\n";
         std::cin >> domstate;
           switch(domstate){
-          case F :
+          case 'F':
                   
           break;
-          case L :
+          case 'L':
                   
           break;
-          case C :
+          case 'C':
                   
           break;
-          case R :
+          case 'R':
                   
           break;
-          case E;
+          case 'E':
                   
           break;
           default :
@@ -92,19 +92,18 @@ int main(){
         std::cout << "Would you like to check another sorting method? (y/n)\n";
         std::cin>> dinp;
                 
-        } while (dinp != "n" || dinp != "N");
-                
-    }
+        } while (dinp != 'n' || dinp != 'N');     
+    
     default :
       std::cout << "Invalid entry.\n";
     }
     std::cout << "Would you like to check another list of students? (y/n) \n";
     std::cin >> inp;
-} while (inp != "n" || inp != "N");
+} while (inp != 'n' || inp != 'N');
 
 ////////////////////////////////////////part 4/////////////////////////////////////////////////
   //Read the domestic-stu.txt file and exit if failed
-  string line;
+  std::string line;
   char temp; 
   ifstream domesticFile("domestic-stu.txt");
   

@@ -157,14 +157,8 @@ std::string DomesticStudent::getProvince() const{
     return Province;
 }
 
-<<<<<<< HEAD
 void DomesticStudent::setProvince(std::string Prov){
   Province = Prov; 
-=======
-void DometicStudent::setProvince(std::string Prov);
-{
-    Province = Prov;
->>>>>>> 10a10bc48d487877549eb7e23cd48f9aec9d735e
 }
 
 std::ostream& operator <<(std::ostream& outs, const DomesticStudent& theDomStudent)
