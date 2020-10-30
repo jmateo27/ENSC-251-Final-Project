@@ -295,15 +295,15 @@ char giveback(std::string student, int n ){
   return student[n];
 }
 
-DomesticStudent* DomArray(DomesticStudent *ptr, int &size){
+DomesticStudent* DomArray(DomesticStudent *ptr, std::string filename, int &size){
   ////////////////////////////////////////part 4/////////////////////////////////////////////////
     //Read the domestic-stu.txt file and exit if failed
     std::string line;
     char temp; 
-    ifstream domesticFile("domestic-stu.txt");
+    ifstream domesticFile(filename);
     
     if(!domesticFile.is_open()) {
-      cout << "Unable to open file domestic-stu.txt" << endl;
+      std::cout << "Unable to open file " << filename << std::endl;
       return NULL;
     }
 
@@ -327,7 +327,7 @@ DomesticStudent* DomArray(DomesticStudent *ptr, int &size){
       lines++; 
     }
     domesticFile.close();
-    ifstream domesticFile2("domestic-stu.txt"); 
+    ifstream domesticFile2(filename); 
     ptr = new DomesticStudent[lines];
     size = lines;
 
@@ -392,32 +392,21 @@ DomesticStudent* DomArray(DomesticStudent *ptr, int &size){
 
 }
 
-InternationalStudent* InterArray(InternationalStudent *ptr, int &size){
+InternationalStudent* InterArray(InternationalStudent *ptr, std::string filename, int &size){
   ////////////////////////////////////////part 4/////////////////////////////////////////////////
     //Read the domestic-stu.txt file and exit if failed
     std::string line;
     char temp; 
     ToeflScore *thetoefl;
-    ifstream internationalFile("international-stu.txt");
+    ifstream internationalFile(filename);
     
     if(!internationalFile.is_open()) {
-      cout << "Unable to open file international-stu.txt" << endl;
+      std::cout << "Unable to open file " << filename << std::endl;
       return NULL;
     }
 
-    //Read the first line of domestic-stu.txt, which specifies
-    //the file format. And then print it out to the screen
     getline(internationalFile, line);
-  //  cout << "File format: " << line << endl;
 
-    /*Keep reading the rest of the lines in domestic-stu.txt.
-    *In the example code here, I will read each data separated
-    *by a comma, and then print it out to the screen.
-    *In your lab assignment 1, you should use these read data
-    *to initialize your DomesticStudent object. Then you can
-    *use get and set functions to manipulate your object, and
-    *print the object content to the screen
-    */
     int stu_count = 1;
 
     int lines = 0; 
@@ -425,7 +414,7 @@ InternationalStudent* InterArray(InternationalStudent *ptr, int &size){
       lines++; 
     }
     internationalFile.close();
-    ifstream internationalFile2("international-stu.txt"); 
+    ifstream internationalFile2(filename); 
     ptr = new InternationalStudent[lines];
     size = lines; //might not work :)
 
@@ -434,33 +423,22 @@ InternationalStudent* InterArray(InternationalStudent *ptr, int &size){
     
 
     while( getline(internationalFile2, line) ) {
-    // arrDom = new DomesticStudent[1];
-      /* process each line, get each field separated by a comma.
-      *We use istringstream to handle it.
-      *Note in this example code here, we assume the file format
-      *is perfect and do NOT handle error cases. We will leave the
-      *error and exception handling of file format to Lab Assignment 4
-      */ 
+
       istringstream ss(line);
 
       std::string firstName, lastName, country, s_cgpa, s_researchScore, s_reading, s_listening, s_speaking, s_writing;
       float cgpa;
       int researchScore, reading, listening, speaking, writing;
 
-      //get firstName separated by comma
       getline(ss, firstName, ',');
 
-      //get lastName separated by comma
       getline(ss, lastName, ',');
 
-      //get province separated by comma
       getline(ss, country, ',');
 
-      //get cpga separated by comma, and convert string to float
       getline(ss, s_cgpa, ',');
       cgpa = atof(s_cgpa.c_str());
-      
-      //get researchScore separated by comma, and convert it to int
+
       getline(ss, s_researchScore, ',');
       researchScore = atoi(s_researchScore.c_str());
 
@@ -481,12 +459,6 @@ InternationalStudent* InterArray(InternationalStudent *ptr, int &size){
       thetoefl -> setListening(listening);
       thetoefl -> setWriting(writing);
       thetoefl -> setSpeaking(speaking);
-
-      //print the student info to the screen
-/*       cout << "Domestic student " << stu_count << " " << firstName << " " 
-    << lastName << " from " << province << " province has cgpa of "
-    << cgpa << ", and research score of " << researchScore << endl; */
-    
 
       InternationalStudent *temp = ptr + stu_count - 1;
 

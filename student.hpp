@@ -87,13 +87,14 @@ class DomesticStudent : public Student{
 class InternationalStudent : public Student{
 //child class of the Student class
     public:
-        InternationalStudent(std::string FName, std::string LName, float grade, int RScore, int id, std::string Con, ToeflScore toefl);
+        InternationalStudent(std::string FName, std::string LName, float grade,int RScore, int id, std::string Con, ToeflScore toefl);
         InternationalStudent(std::string FName, std::string LName, int id, std::string Con, ToeflScore toefl);
         InternationalStudent();
         std::string getCountry() const;
         ToeflScore getToefl() const;
         void settoefl(ToeflScore thescore);
         void setCountry(std::string Con);
+        InternationalStudent* InterArray(InternationalStudent *ptr, std::string *filename, int &size);
         
         friend std::ostream& operator <<(std::ostream& outs, const InternationalStudent& theIntStudent);
     private:
@@ -106,7 +107,7 @@ class InternationalStudent : public Student{
 char upper2lowercase(char c);
 void formatID(std::ostream& outs, const int num);
 char giveback(std::string student, int n );
-DomesticStudent* DomArray(DomesticStudent *ptr, int &size);
-InternationalStudent* InterArray(InternationalStudent *ptr, int &size);
+DomesticStudent* DomArray(DomesticStudent *ptr, std::string filename, int &size);
+InternationalStudent* InterArray(InternationalStudent *ptr, std::string filename, int &size);
 void getDomArray(DomesticStudent *ptr, int size);
 void getInterArray(InternationalStudent *ptr, int size);

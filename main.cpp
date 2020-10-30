@@ -10,13 +10,15 @@
  */
 int main(){
   /////////////////////////////////////////MENU/////////////////////////////////////////////////////////////
-    int sizeD;
-    int sizeI;
+
+    int sizeI, sizeD;
+    std::string dom = "domestic-stu.txt"; 
+    std::string inter = "international-stu.txt";
     DomesticStudent *domstu;
-    DomArray(domstu, sizeD);
+    DomArray(domstu, dom, sizeD);
   
     InternationalStudent *intstu;
-    InterArray(intstu, sizeI);
+    InterArray(intstu, inter, sizeI);
 
     char intstate, domstate, state, dinp, iinp, inp;
     do{
