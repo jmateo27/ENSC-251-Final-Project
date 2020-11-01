@@ -121,6 +121,7 @@ int compareFirstName (Student student1, Student student2){
     }
     return 0;
 }
+
 int compareLastName (Student student1, Student student2){
     std::string name1 = student1.getLastName();
     std::string name2 = student2.getLastName();
@@ -141,7 +142,6 @@ int compareLastName (Student student1, Student student2){
     return 0;
 }
 
-
 DomesticStudent::DomesticStudent(std::string FName, std::string LName, float grade, int RScore, int id, std::string Prov)
     : Student(FName, LName, grade, RScore, id), Province(Prov){//Takes info from student class
 }
@@ -159,6 +159,26 @@ std::string DomesticStudent::getProvince() const{
 
 void DomesticStudent::setProvince(std::string Prov){
   Province = Prov; 
+}
+
+int compareProvince(DomesticStudent student1, DomesticStudent student2){
+    std::string c1 = student1.getProvince();
+    std::string c2 = student2.getProvince();
+    int len = 0;
+    if (c1.length() >= c2.length())
+        len = c1.length();
+    else
+        len = c2.length();
+
+    for (int i = 0; i < len; i++){
+        if (upper2lowercase(c1[i]) < upper2lowercase(c2[i])){
+            return 1;
+        }
+        else if (upper2lowercase(c1[i]) > upper2lowercase(c2[i])){
+            return -1;
+        }
+    }
+    return 0;
 }
 
 std::ostream& operator <<(std::ostream& outs, const DomesticStudent& theDomStudent)
@@ -182,6 +202,26 @@ InternationalStudent::InternationalStudent(std::string FName, std::string LName,
 
 InternationalStudent::InternationalStudent() //default constructor
 {}
+
+int compareCountry(InternationalStudent student1, InternationalStudent student2){
+    std::string c1 = student1.getCountry();
+    std::string c2 = student2.getCountry();
+    int len = 0;
+    if (c1.length() >= c2.length())
+        len = c1.length();
+    else
+        len = c2.length();
+
+    for (int i = 0; i < len; i++){
+        if (upper2lowercase(c1[i]) < upper2lowercase(c2[i])){
+            return 1;
+        }
+        else if (upper2lowercase(c1[i]) > upper2lowercase(c2[i])){
+            return -1;
+        }
+    }
+    return 0;
+}
     
 std::string InternationalStudent::getCountry() const{
     return Country;
@@ -211,6 +251,7 @@ std::ostream& operator <<(std::ostream& outs, const InternationalStudent& theInt
     formatID(outs, theIntStudent.getid());
     outs << "\nThe student TOEFL score is: \nReading: " << thescore.getReading() << "/30" << "\nListening: " << thescore.getListening();
     outs << "/30" << "\nSpeaking: " << thescore.getSpeaking() << "/30" << "\nWriting: " << thescore.getWriting() << "/30\n";
+  
 }
 
 
@@ -295,15 +336,15 @@ char giveback(std::string student, int n ){
   return student[n];
 }
 
-DomesticStudent* DomArray(DomesticStudent *ptr, std::string filename, int &size){
+DomesticStudent* DomArray(DomesticStudent *ptr, int &size){
   ////////////////////////////////////////part 4/////////////////////////////////////////////////
     //Read the domestic-stu.txt file and exit if failed
     std::string line;
     char temp; 
-    ifstream domesticFile(filename);
+    ifstream domesticFile("domestic-stu.txt");
     
     if(!domesticFile.is_open()) {
-      std::cout << "Unable to open file " << filename << std::endl;
+      std::cout << "Unable to open file domestic-stu.txt" << std::endl;
       return NULL;
     }
 
@@ -327,12 +368,12 @@ DomesticStudent* DomArray(DomesticStudent *ptr, std::string filename, int &size)
       lines++; 
     }
     domesticFile.close();
-    ifstream domesticFile2(filename); 
+    ifstream domesticFile2("domestic-stu.txt"); 
     ptr = new DomesticStudent[lines];
     size = lines;
 
     getline(domesticFile2, line);
-    std::cout << lines << "\n" << line << "\n";
+    //std::cout << lines << "\n" << line << "\n";
     
 
     while( getline(domesticFile2, line) ) {
@@ -372,16 +413,16 @@ DomesticStudent* DomArray(DomesticStudent *ptr, std::string filename, int &size)
     << cgpa << ", and research score of " << researchScore << endl; */
     
 
-  DomesticStudent *temp = ptr + stu_count - 1;
+  //DomesticStudent *temp = ptr + stu_count - 1;
 
-    temp->setFirstName(firstName);
-    temp->setLastName(lastName);
-    temp->setCGPA(cgpa);
-    temp->setResearchScore(researchScore);
-    temp->setAppID(stu_count);
-    temp->setProvince(province);
+    (ptr + stu_count - 1) ->setFirstName(firstName);
+    (ptr + stu_count - 1)->setLastName(lastName);
+    (ptr + stu_count - 1)->setCGPA(cgpa);
+    (ptr + stu_count - 1)->setResearchScore(researchScore);
+    (ptr + stu_count - 1)->setAppID(stu_count);
+    (ptr + stu_count - 1)->setProvince(province);
 
-    std::cout << *temp << std::endl;
+    //std::cout << *(ptr + stu_count - 1) << std::endl;
 
     stu_count++;
     
@@ -389,19 +430,19 @@ DomesticStudent* DomArray(DomesticStudent *ptr, std::string filename, int &size)
  
     //close your file
     domesticFile2.close();
-
+    return ptr;
 }
 
-InternationalStudent* InterArray(InternationalStudent *ptr, std::string filename, int &size){
+InternationalStudent* InterArray(InternationalStudent *ptr, int &size){
   ////////////////////////////////////////part 4/////////////////////////////////////////////////
     //Read the domestic-stu.txt file and exit if failed
     std::string line;
     char temp; 
     ToeflScore *thetoefl;
-    ifstream internationalFile(filename);
+    ifstream internationalFile("international-stu.txt");
     
     if(!internationalFile.is_open()) {
-      std::cout << "Unable to open file " << filename << std::endl;
+      std::cout << "Unable to open file international-stu.txt" << std::endl;
       return NULL;
     }
 
@@ -414,12 +455,12 @@ InternationalStudent* InterArray(InternationalStudent *ptr, std::string filename
       lines++; 
     }
     internationalFile.close();
-    ifstream internationalFile2(filename); 
+    ifstream internationalFile2("international-stu.txt"); 
     ptr = new InternationalStudent[lines];
     size = lines; //might not work :)
 
     getline(internationalFile2, line);
-    std::cout << lines << "\n" << line << "\n";
+    //std::cout << lines << "\n" << line << "\n";
     
 
     while( getline(internationalFile2, line) ) {
@@ -460,18 +501,18 @@ InternationalStudent* InterArray(InternationalStudent *ptr, std::string filename
       thetoefl -> setWriting(writing);
       thetoefl -> setSpeaking(speaking);
 
-      InternationalStudent *temp = ptr + stu_count - 1;
+      //InternationalStudent *temp = ptr + stu_count - 1;
 
-      temp -> setFirstName(firstName);
-      temp -> setLastName(lastName);
-      temp -> setCGPA(cgpa);
-      temp -> setResearchScore(researchScore);
-      temp -> setAppID(stu_count);
-      temp -> setCountry(country);
-      temp -> settoefl(*(thetoefl));
+      (ptr + stu_count - 1) -> setFirstName(firstName);
+      (ptr + stu_count - 1) -> setLastName(lastName);
+      (ptr + stu_count - 1) -> setCGPA(cgpa);
+      (ptr + stu_count - 1) -> setResearchScore(researchScore);
+      (ptr + stu_count - 1) -> setAppID(stu_count);
+      (ptr + stu_count - 1) -> setCountry(country);
+      (ptr + stu_count - 1) -> settoefl(*(thetoefl));
       delete [] thetoefl;
 
-      std::cout << *temp << std::endl;
+      //std::cout << *(ptr + stu_count - 1) << std::endl;
 
       stu_count++;
     
@@ -479,7 +520,7 @@ InternationalStudent* InterArray(InternationalStudent *ptr, std::string filename
  
     //close your file
     internationalFile2.close();
-
+    return ptr;
 }
 
 void getDomArray(DomesticStudent *ptr, int size){
@@ -489,4 +530,431 @@ void getDomArray(DomesticStudent *ptr, int size){
 void getInterArray(InternationalStudent *ptr, int size){
     for (int i = 0; i < size; i++)
     std::cout << *(ptr + i) << "\n";
+}
+
+//////////////////////////////////INTERNATIONAL/////////////////////////////////////
+
+void mergeInt(InternationalStudent *arr, int min, int mid, int max, char c)
+{
+  int n1 = mid - min + 1, n2 = max - mid;
+  InternationalStudent leftArray[n1], rightArray[n2];
+
+  for(int i = 0; i < n1; i++)
+    leftArray[i] = arr[min + i];
+  for(int j = 0; j < n2; j++)
+    rightArray[j] = arr[mid + 1 + j];
+
+  int i = 0, j = 0, k = min; 
+  if (c == 'f' || c == 'F'){
+  while (i < n1 && j < n2){
+    if (compareFirstName(leftArray[i], rightArray[j]) == 1){
+      arr[k] = leftArray[i];
+      i++;
+    }
+    else if(compareFirstName(leftArray[i], rightArray[j]) == -1){
+      arr[k] = rightArray[j];
+      j++;
+    }else if (compareFirstName(leftArray[i], rightArray[j]) == 0){
+      arr[k] = rightArray[j];
+      j++;
+    }
+    k++;
+  }
+  }else if(c == 'l' || c == 'L'){
+      while (i < n1 && j < n2){
+    if (compareLastName(leftArray[i], rightArray[j]) == 1){
+      arr[k] = leftArray[i];
+      i++;
+    }
+    else if(compareLastName(leftArray[i], rightArray[j]) == -1){
+      arr[k] = rightArray[j];
+      j++;
+    }else if (compareLastName(leftArray[i], rightArray[j]) == 0){
+      arr[k] = rightArray[j];
+      j++;
+    }
+    k++;
+  }
+  }else if(c == 'c' || c == 'C'){
+    while (i < n1 && j < n2){
+      if (leftArray[i].getCGPA() >= rightArray[j].getCGPA()){
+        arr[k] = leftArray[i];
+        i++;
+      }
+      else{
+        arr[k] = rightArray[j];
+        j++;  
+      }
+    //extend else so that we use mergeCGPA recursively to update left/rightArray then put into arr[k].
+    k++;
+  }
+  } else if (c == 'r' || c == 'R'){
+    while (i < n1 && j < n2){
+      if (leftArray[i].getRScore() >= rightArray[j].getRScore()){
+        arr[k] = leftArray[i];
+        i++;
+      }
+      else{
+        arr[k] = rightArray[j];
+        j++;
+      }
+      //extend else so that we use mergeCGPA recursively to update left/rightArray then put into arr[k].
+      k++;
+    }
+
+  }else if (c == 'k' || c == 'K'){
+    while (i < n1 && j < n2){
+      if (compareCountry(leftArray[i], rightArray[j]) == 1){
+        arr[k] = leftArray[i];
+        i++;
+      }
+      else if(compareCountry(leftArray[i], rightArray[j]) == -1){
+        arr[k] = rightArray[j];
+        j++;
+      }else if (compareCountry(leftArray[i], rightArray[j]) == 0){
+        arr[k] = rightArray[j];
+        j++;
+      }
+      k++;
+    }
+  }else
+    exit (1);
+  while (i <  n1){ 
+    arr[k] = leftArray[i];
+    i++;
+    k++;
+  }
+
+  while (j < n2){
+    arr[k] = rightArray[j];
+    j++;
+    k++;
+  }
+
+}
+
+void mergeIntCGPA(InternationalStudent *arr, int min, int mid, int max, char c)
+{
+  int n1 = mid - min + 1, n2 = max - mid;
+
+  InternationalStudent leftArray[n1], rightArray[n2];
+
+  for(int i = 0; i < n1; i++)
+    leftArray[i] = arr[min + i];
+  for(int j = 0; j < n2; j++)
+    rightArray[j] = arr[mid + 1 + j];
+
+  int i = 0, j = 0, k = min; 
+    
+  while (i < n1 && j < n2){
+    if (leftArray[i].getCGPA() >= rightArray[j].getCGPA()){
+      arr[k] = leftArray[i];
+      i++;
+    }
+    else{ //if (leftArray[i].getRScore() < rightArray[j].getRScore()){
+      arr[k] = rightArray[j];
+      j++;
+    }
+    //extend else so that we use mergeCGPA recursively to update left/rightArray then put into arr[k].
+    k++;
+  }
+  while (i < n1){
+    arr[k] = leftArray[i];
+    i++;
+    k++;
+  }
+  while (j < n2){
+    arr[k] = rightArray[j];
+    j++;
+    k++;
+  }
+}
+
+void mergeSortInt(InternationalStudent *arr, int min, int max, char c){
+  if (min < max){
+    int mid = min + (max - min) / 2;
+    mergeSortInt(arr, min, mid, c);
+    mergeSortInt(arr, mid + 1, max, c);
+    mergeInt(arr, min, mid, max, c);
+  }
+}
+
+void mergeIntCGPA2(InternationalStudent *arr, int min, int max){
+  int i = min, j = min, activate = 0; 
+  while (j != max || i != max){
+    j = i;   
+    while(j != max && compareResearchScore(arr[j], arr[j+1]) == 0){
+      
+      if (j == max + 1){
+        j = max;
+      }else 
+        j++;
+
+      activate = 1; 
+    }
+
+    if (activate == 1){
+      mergeSortInt(arr, i, j, 'C');
+      i = j;
+      activate = 0;    
+    }else{
+      i++; 
+    }
+  }
+}
+
+void mergeInt3(InternationalStudent *arr, int min, int max){
+  int i = min, j = min, activate = 0; 
+  while (j != max || i != max){
+    j = i;   
+    while(j != max && compareCGPA(arr[j], arr[j+1]) == 0){
+      if (j == max + 1){
+        j = max;
+      }else 
+        j++;
+
+      activate = 1; 
+    }
+
+    if (activate == 1){
+      mergeSortInt(arr, i, j, 'K'); //country merge
+      i = j;
+      activate = 0;    
+    }else{
+      i++; 
+    }
+
+  }
+}
+
+void dumpStu(InternationalStudent *arr, int &size){
+  ToeflScore empty(0,0,0,0);
+  InternationalStudent fake("", "", 0,0,0,"", empty);
+
+  int newSize = 0; 
+  for(int i = 0; i < size; i++){  
+    ToeflScore tempToefl = arr[i].getToefl();
+    if (tempToefl.getWriting() < 20 || tempToefl.getReading() < 20 || 
+        tempToefl.getListening() < 20 || tempToefl.getSpeaking() < 20 || tempToefl.getTOEFL() < 93){
+      continue; 
+    }else 
+      newSize++; 
+  }
+
+  InternationalStudent copy[newSize];
+  for(int i = 0, j = 0; i < size; i++){  
+    ToeflScore tempToefl = arr[i].getToefl();
+    if (tempToefl.getWriting() < 20 || tempToefl.getReading() < 20 || 
+        tempToefl.getListening() < 20 || tempToefl.getSpeaking() < 20 || tempToefl.getTOEFL() < 93){
+      continue; 
+    }else 
+      copy[j] = arr[i];  
+      j++; 
+  }
+  
+  for (int i = 0; i < newSize; i++){
+    arr[i] = copy[i];
+  }
+
+  for(int i = newSize; i < size; i++){
+    arr[i] = fake; 
+  }
+  size = newSize;
+}
+
+
+//////////////////////////////////DOMESTIC/////////////////////////////////////
+
+void mergeDom(DomesticStudent *arr, int min, int mid, int max, char c)
+{
+  int n1 = mid - min + 1, n2 = max - mid;
+  DomesticStudent leftArray[n1], rightArray[n2];
+
+  for(int i = 0; i < n1; i++)
+    leftArray[i] = arr[min + i];
+  for(int j = 0; j < n2; j++)
+    rightArray[j] = arr[mid + 1 + j];
+
+  int i = 0, j = 0, k = min; 
+  if (c == 'f' || c == 'F'){
+  while (i < n1 && j < n2){
+    if (compareFirstName(leftArray[i], rightArray[j]) == 1){
+      arr[k] = leftArray[i];
+      i++;
+    }
+    else if(compareFirstName(leftArray[i], rightArray[j]) == -1){
+      arr[k] = rightArray[j];
+      j++;
+    }else if (compareFirstName(leftArray[i], rightArray[j]) == 0){
+      arr[k] = rightArray[j];
+      j++;
+    }
+    k++;
+  }
+  }else if(c == 'l' || c == 'L'){
+      while (i < n1 && j < n2){
+    if (compareLastName(leftArray[i], rightArray[j]) == 1){
+      arr[k] = leftArray[i];
+      i++;
+    }
+    else if(compareLastName(leftArray[i], rightArray[j]) == -1){
+      arr[k] = rightArray[j];
+      j++;
+    }else if (compareLastName(leftArray[i], rightArray[j]) == 0){
+      arr[k] = rightArray[j];
+      j++;
+    }
+    k++;
+  }
+  }else if(c == 'c' || c == 'C'){
+    while (i < n1 && j < n2){
+      if (leftArray[i].getCGPA() >= rightArray[j].getCGPA()){
+        arr[k] = leftArray[i];
+        i++;
+      }
+      else{
+        arr[k] = rightArray[j];
+        j++;  
+      }
+    //extend else so that we use mergeCGPA recursively to update left/rightArray then put into arr[k].
+    k++;
+  }
+  } else if (c == 'r' || c == 'R'){
+    while (i < n1 && j < n2){
+      if (leftArray[i].getRScore() >= rightArray[j].getRScore()){
+        arr[k] = leftArray[i];
+        i++;
+      }
+      else{
+        arr[k] = rightArray[j];
+        j++;
+      }
+      //extend else so that we use mergeCGPA recursively to update left/rightArray then put into arr[k].
+      k++;
+    }
+
+  }else if (c == 'p' || c == 'P'){
+    while (i < n1 && j < n2){
+      if (compareProvince(leftArray[i], rightArray[j]) == 1){
+        arr[k] = leftArray[i];
+        i++;
+      }
+      else if(compareProvince(leftArray[i], rightArray[j]) == -1){
+        arr[k] = rightArray[j];
+        j++;
+      }else if (compareProvince(leftArray[i], rightArray[j]) == 0){
+        arr[k] = rightArray[j];
+        j++;
+      }
+      k++;
+    }
+  }else
+    exit (1);
+  while (i <  n1){
+    arr[k] = leftArray[i];
+    i++;
+    k++;
+  }
+
+  while (j < n2){
+    arr[k] = rightArray[j];
+    j++;
+    k++;
+  }
+
+}
+
+void mergeDomCGPA(DomesticStudent *arr, int min, int mid, int max, char c)
+{
+  int n1 = mid - min + 1, n2 = max - mid;
+
+  DomesticStudent leftArray[n1], rightArray[n2];
+
+  for(int i = 0; i < n1; i++)
+    leftArray[i] = arr[min + i];
+  for(int j = 0; j < n2; j++)
+    rightArray[j] = arr[mid + 1 + j];
+
+  int i = 0, j = 0, k = min; 
+    
+  while (i < n1 && j < n2){
+    if (leftArray[i].getCGPA() >= rightArray[j].getCGPA()){
+      arr[k] = leftArray[i];
+      i++;
+    }
+    else{ //if (leftArray[i].getRScore() < rightArray[j].getRScore()){
+      arr[k] = rightArray[j];
+      j++;
+    }
+    //extend else so that we use mergeCGPA recursively to update left/rightArray then put into arr[k].
+    k++;
+  }
+  while (i < n1){
+    arr[k] = leftArray[i];
+    i++;
+    k++;
+  }
+  while (j < n2){
+    arr[k] = rightArray[j];
+    j++;
+    k++;
+  }
+}
+
+void mergeSortDom(DomesticStudent *arr, int min, int max, char c){
+  if (min < max){
+    int mid = min + (max - min) / 2;
+    mergeSortDom(arr, min, mid, c);
+    mergeSortDom(arr, mid + 1, max, c);
+    mergeDom(arr, min, mid, max, c);
+  }
+}
+
+void mergeDomCGPA2(DomesticStudent *arr, int min, int max){
+  int i = min, j = min, activate = 0; 
+  while (j != max || i != max){
+    j = i;   
+    while(j != max && compareResearchScore(arr[j], arr[j+1]) == 0){
+      
+      if (j == max + 1){
+        j = max;
+      }else 
+        j++;
+
+      activate = 1; 
+    }
+
+    if (activate == 1){
+      mergeSortDom(arr, i, j, 'C');
+      i = j;
+      activate = 0;    
+    }else{
+      i++; 
+    }
+
+  }
+}
+
+void mergeDom3(DomesticStudent *arr, int min, int max){
+  int i = min, j = min, activate = 0; 
+  while (j != max || i != max){
+    j = i;   
+    while(j != max && compareCGPA(arr[j], arr[j+1]) == 0){
+      if (j == max + 1){
+        j = max;
+      }else 
+        j++;
+
+      activate = 1; 
+    }
+
+    if (activate == 1){
+      mergeSortDom(arr, i, j, 'P'); //country merge
+      i = j;
+      activate = 0;    
+    }else{
+      i++; 
+    }
+
+  }
 }

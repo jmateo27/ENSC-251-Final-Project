@@ -6,6 +6,7 @@ using namespace std; //use namespace std
 #include <fstream> //file processing
 #include <sstream> //formatted string processing
 #include <cstdlib> //atof and atoi
+#include <string.h>
 
 class Student{
 //parent class of the DomesticStudent and InternationalStudent class
@@ -76,7 +77,8 @@ class DomesticStudent : public Student{
         std::string getProvince() const;
         
         void setProvince(std::string Prov);
-    friend std::ostream& operator <<(std::ostream& outs, const DomesticStudent& theDomStudent);
+        friend std::ostream& operator <<(std::ostream& outs, const DomesticStudent& theDomStudent);
+        friend int compareProvince(DomesticStudent student1, DomesticStudent student2);
 
     // friend operator << (string FName, string LName, float grade, int RScore, int id, string Prov);
     private:
@@ -97,6 +99,7 @@ class InternationalStudent : public Student{
         InternationalStudent* InterArray(InternationalStudent *ptr, std::string *filename, int &size);
         
         friend std::ostream& operator <<(std::ostream& outs, const InternationalStudent& theIntStudent);
+        friend int compareCountry(InternationalStudent student1, InternationalStudent student2);
     private:
         std::string Country;
         ToeflScore theirscore;
@@ -107,7 +110,14 @@ class InternationalStudent : public Student{
 char upper2lowercase(char c);
 void formatID(std::ostream& outs, const int num);
 char giveback(std::string student, int n );
-DomesticStudent* DomArray(DomesticStudent *ptr, std::string filename, int &size);
-InternationalStudent* InterArray(InternationalStudent *ptr, std::string filename, int &size);
+DomesticStudent* DomArray(DomesticStudent *ptr, int &size);
+InternationalStudent* InterArray(InternationalStudent *ptr, int &size);
 void getDomArray(DomesticStudent *ptr, int size);
 void getInterArray(InternationalStudent *ptr, int size);
+void mergeSortInt(InternationalStudent *arr, int min, int max, char c);
+void mergeIntCGPA2(InternationalStudent *arr, int min, int max);
+void mergeInt3(InternationalStudent *arr, int min, int max);
+void mergeSortDom(DomesticStudent *arr, int min, int max, char c);
+void mergeDomCGPA2(DomesticStudent *arr, int min, int max);
+void mergeDom3(DomesticStudent *arr, int min, int max);
+void dumpStu(InternationalStudent *arr, int &size);
