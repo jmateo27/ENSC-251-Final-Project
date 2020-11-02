@@ -4,10 +4,6 @@
 
 #include "student.hpp"
 
-/*I provide example code here to he lp you read the input
- *data from a file, so that you can focus on creating
- *and manipulating classes and objects
- */
 int main(){
   /////////////////////////////////////////MENU/////////////////////////////////////////////////////////////
     int sizeI, sizeD, lo;
