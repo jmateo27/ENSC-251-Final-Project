@@ -184,7 +184,6 @@ class InternationalStudent : public Student{ //Creating an International child c
         //Precondition: the Mutator function is used to alter the Country of origin of the student
         //and is used by our cpp to input the input data from the txt to an array
 
-        InternationalStudent* InterArray(InternationalStudent *ptr, std::string *filename, int &size); 
         
         friend std::ostream& operator <<(std::ostream& outs, const InternationalStudent& theIntStudent);
         //Precondition: the Insertion operator is used to perform outputs within the class InternationalStudent
