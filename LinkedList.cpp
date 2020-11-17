@@ -19,6 +19,12 @@ void IntLinkedList::addIntStudent(InternationalStudent stud){
 		int placeholder = searchIntStudent(stud, tmpstud);
 		if(placeholder == 1){//stud < tmpstud 
 			//need to figure out how to add :P
+			//hello future me <3 I have an idea 
+			//if it's greater than then store whatever is being held in there in a temp ptr
+			//and replace it with tmpstud
+			//then assign tmpstud.next to the temp ptr
+			//and if it is less than then store whatever is held in next into a temp ptr 
+			//then replace it with tmpstud
 		}else if (placeholder == 0){// stud > tmpstud
 			
 		}
@@ -96,20 +102,20 @@ void DomLinkedList::addDomStudent(DomesticStudent stud){
                     if (CGPA == temp -> getCGPA()){
                         if (compareProvince(*toAdd, *temp) == 0 ||
                             compareProvince(*toAdd, *temp) == 1){
-                            temp -> next = head;
-                            head = temp;
+                            toAdd -> next = head;
+                            head = toAdd;
                         } else if (compareProvince(*toAdd, *temp) == -1)
                             temp = temp -> next;
                         else exit(1);
                     } else if (CGPA > temp -> getCGPA()){
-                        temp -> next = head;
-                        head = temp;
+                        toAdd -> next = head;
+                        head = toAdd;
                     } else if (CGPA < temp -> getCGPA())
                         temp = temp -> next;
                     else exit(1);
                 } else if (RScore > temp -> getRScore()){
-                    temp -> next = head;
-                    head = temp;
+                    toAdd -> next = head;
+                    head = toAdd;
                 } else if (RScore < temp -> getRScore())
                     temp = temp -> next;
                 else exit(1);
@@ -119,7 +125,13 @@ void DomLinkedList::addDomStudent(DomesticStudent stud){
                         if (compareProvince(*toAdd, *temp) == 0 ||
                             compareProvince(*toAdd, *temp) == 1){
                             temp -> next = prev -> next;
-                            prev -> next = temp;
+                            prev -> next = temp;x
+                            temp -> setProvince(toAdd -> getProvince());
+                            temp -> setCGPA(toAdd -> getCGPA());
+                            temp -> setResearchScore(toAdd -> getRScore()); 
+                            temp -> setFirstName(toAdd -> getFirstName());
+                            temp -> setLastName(toAdd -> getLastName());
+                            temp -> setAppID(toAdd -> getid());
                         } else if (compareProvince(*toAdd, *temp) == -1){
                             prev = prev -> next;
                             temp = temp -> next;
@@ -127,6 +139,12 @@ void DomLinkedList::addDomStudent(DomesticStudent stud){
                     } else if (CGPA > temp -> getCGPA()){
                         temp -> next = prev -> next;
                         prev -> next = temp;
+                        temp -> setProvince(toAdd -> getProvince());
+                        temp -> setCGPA(toAdd -> getCGPA());
+                        temp -> setResearchScore(toAdd -> getRScore()); 
+                        temp -> setFirstName(toAdd -> getFirstName());
+                        temp -> setLastName(toAdd -> getLastName());
+                        temp -> setAppID(toAdd -> getid());
                     } else if (CGPA < temp -> getCGPA()){
                         prev = prev -> next;
                         temp = temp -> next;
@@ -134,6 +152,12 @@ void DomLinkedList::addDomStudent(DomesticStudent stud){
                 } else if (RScore > temp -> getRScore()){
                     temp -> next = prev -> next;
                     prev -> next = temp;
+                    temp -> setProvince(toAdd -> getProvince());
+                    temp -> setCGPA(toAdd -> getCGPA());
+                    temp -> setResearchScore(toAdd -> getRScore()); 
+                    temp -> setFirstName(toAdd -> getFirstName());
+                    temp -> setLastName(toAdd -> getLastName());
+                    temp -> setAppID(toAdd -> getid());
                 } else if (RScore < temp -> getRScore()){
                     prev = prev -> next;
                     temp = temp -> next;
@@ -145,9 +169,10 @@ void DomLinkedList::addDomStudent(DomesticStudent stud){
             }
         } while (temp != tail);
         if (temp == tail){ //if is the lowest
-            tail -> next = temp;
-            tail = temp;
+            tail -> next = toAdd;
+            tail = toAdd;
         }
     }
+    delete toAdd;
     return;
 } 
