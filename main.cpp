@@ -2,7 +2,9 @@
 //you can manipulate your class objects here
 #include <iostream> //cin and cout
 
-#include "student.hpp"
+//#include "student.hpp"
+#include "domesticstudent.hpp"
+#include "internationalstudent.hpp"
 
 int main(){
   /////////////////////////////////////////MENU/////////////////////////////////////////////////////////////
@@ -235,3 +237,4 @@ int main(){
   delete [] intstu;
   return 0;
 }
+
