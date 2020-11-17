@@ -7,6 +7,7 @@ using namespace std; //use namespace std
 #include <sstream> //formatted string processing
 #include <cstdlib> //atof and atoi
 #include <string.h> //needed for the string types (Names)
+using std::string;
 
 class Student{ // Creating the Student Class
 //parent class of the DomesticStudent and InternationalStudent class
@@ -76,8 +77,9 @@ class Student{ // Creating the Student Class
         friend std::ostream& operator <<(std::ostream& outs, const Student& theStudent);
         //Precondition: the insertion operator for use within our functions and to output
         //in the terminal
-         
 
+        Student* next;
+        
     private: // The following are the private members
         std::string FirstName; // private member variable First Name for ADT
         std::string LastName; // private member variable Last Name for ADT
@@ -85,7 +87,6 @@ class Student{ // Creating the Student Class
         int ResearchScore; // private member variable Research Score for ADT
         int AppID; //just four digits and is a private member variable for ADT
 };
-
 
 
 #endif //STUDENT_H

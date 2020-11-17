@@ -13,7 +13,7 @@ Student::Student()
 {}
 
 /***************************************Set functions***********************************************/
-void Student::setFirstName(std::string FName){ 
+void Student::setFirstName(std::string FName){
     FirstName = FName;
 }
 
