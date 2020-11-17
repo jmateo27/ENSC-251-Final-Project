@@ -33,6 +33,7 @@ class InternationalStudent : public Student{ //Creating an International child c
         //Precondition: this function is used to compare the Country of 2 students,
         //Depending on which input is greater (alphabetically) the function will output a 1 or -1
         //And if the inputs have the same value, it returns a 0 it is used in the sorting function
+		InternationalStudent* next;
 
     private: // The following are the private members
         std::string Country; // only the Coutnry member is private because it is unique to the International Students Class
