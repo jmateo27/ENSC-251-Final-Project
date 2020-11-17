@@ -17,7 +17,9 @@ void IntLinkedList::addIntStudent(InternationalStudent stud){
 		head = tmpstud; 
 	}else{
 		int placeholder = searchIntStudent(stud, tmpstud);
-		if(placeholder == 1){
+		if(placeholder == 1){//stud < tmpstud 
+			//need to figure out how to add :P
+		}else if (placeholder == 0){// stud > tmpstud
 			
 		}
 	}
@@ -60,8 +62,16 @@ int IntLinkedList::searchIntStudent(InternationalStudent stud, InternationalStud
 	}
 }
 
+void DomLinkedList::printList() const{
+    DomesticStudent* temp = head;
+    while (temp != NULL){
+        cout << *temp << "\n\n";
+    }    
+    return;
+}
+
 DomesticStudent* DomLinkedList::getHead(){
-    return head;
+    return head; 
 }
 
 
