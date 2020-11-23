@@ -673,13 +673,12 @@ void GenLinkedList::mergeGenStudent(IntLinkedList inter, DomLinkedList dom){
 			*temp = stud[j];
 		}
 		cout << "temp: " << *temp << "\n";
+		temp->next = new Student; 
 		temp = temp -> next; 
-		temp = new Student;  
-
 	}
 	
 	temp->next = nullptr; 
-	cout << "last temp: " << temp << "\n";
+	cout << "last temp: " << *temp << "\n";
 
 }
 
