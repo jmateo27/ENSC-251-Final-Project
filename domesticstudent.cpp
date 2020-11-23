@@ -1,5 +1,6 @@
 #include "domesticstudent.hpp"
 #include <iostream>
+#include <iomanip>
 
 DomesticStudent::DomesticStudent(std::string FName, std::string LName, float grade, int RScore, int id, std::string Prov)
     : Student(FName, LName, grade, RScore, id), Province(Prov){
@@ -47,7 +48,7 @@ std::ostream& operator <<(std::ostream& outs, const DomesticStudent& theDomStude
 {
     outs << "The domestic student's name is: " << theDomStudent.getFirstName() << " " << theDomStudent.getLastName();
     outs << "\nThe student is from: " << theDomStudent.getProvince();
-    outs << "\nThe CGPA is: " << theDomStudent.getCGPA();
+    outs << "\nThe CGPA is: " << fixed << setprecision(1) << theDomStudent.getCGPA();
     outs << "\nThe Reseach Score is: " << theDomStudent.getRScore();
     outs << "\nThe student ID is: 2020";
     formatID(outs, theDomStudent.getid());
