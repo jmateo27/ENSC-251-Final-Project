@@ -7,10 +7,11 @@ using namespace std; //use namespace std
 #include <sstream> //formatted string processing
 #include <cstdlib> //atof and atoi
 #include <string.h> //needed for the string types (Names)
+using std::string;
 
 class Student{ // Creating the Student Class
 //parent class of the DomesticStudent and InternationalStudent class
-    public:// The following are the public members
+    public:
 
         //constructs
         Student(std::string FName, std::string LName, float grade, int RScore, int id);
@@ -38,7 +39,7 @@ class Student{ // Creating the Student Class
         void setAppID(int id);
         // Precondition: Mutator function for the Student ID of students, 
         //used to create the arrays we use in our code from the text files
-
+		
         //get functions 
         std::string getFirstName() const; 
         // Precondition: Accessor function for the first name of students, 
@@ -76,8 +77,9 @@ class Student{ // Creating the Student Class
         friend std::ostream& operator <<(std::ostream& outs, const Student& theStudent);
         //Precondition: the insertion operator for use within our functions and to output
         //in the terminal
-         
 
+        Student* next;
+        
     private: // The following are the private members
         std::string FirstName; // private member variable First Name for ADT
         std::string LastName; // private member variable Last Name for ADT
@@ -87,9 +89,14 @@ class Student{ // Creating the Student Class
 };
 
 
-
 #endif //STUDENT_H
 
 char upper2lowercase(char c);   // converts inputs to lower case
 void formatID(std::ostream& outs, const int num); // formats the ID for use with the concatenation to a single digit ie. 4.33 becomes 4.3
 char giveback(std::string student, int n ); // used within the Student class
+int compareFullName(string n1, string n2);
+
+void mergeSortGen(Student *arr, int min, int max, char c);
+void mergeGenCGPA2(Student *arr, int min, int max);
+void mergeGen3(Student *arr, int min, int max);
+void mergeGen(Student *arr, int min, int mid, int max, char c);
