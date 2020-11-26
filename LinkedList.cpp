@@ -430,17 +430,14 @@ void DomLinkedList::deleteDomStu(string name){
 }
 
 void DomLinkedList::deleteDomHeadTail(){
-	DomesticStudent *temp = head; 
+	DomesticStudent *temp = head -> next;
 	DomesticStudent* prev = head;
 
 	if(head != nullptr){
-		head = temp -> next;
+		head = head -> next;
 		delete temp;
 	}
 	while(temp != tail){
-		if (temp == head -> next){
-		  prev = head;
-		}
 		prev = prev -> next;
 		temp = temp -> next; 
 	}
