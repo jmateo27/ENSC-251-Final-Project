@@ -3,6 +3,7 @@
 #include <iostream>
 #include <iomanip>
 #include <math.h>
+
 IntLinkedList::IntLinkedList(){
     head = NULL;
     tail = NULL;
@@ -35,8 +36,6 @@ void IntLinkedList::printList() const{
     }    
     return;
 }
-
-
 
 DomesticStudent* DomLinkedList::getHead(){
     return head; 
@@ -404,40 +403,30 @@ void DomLinkedList::createDomStu(int& count){
 }
 
 void DomLinkedList::deleteDomStu(string name){
-  DomesticStudent* temp = head;
-  DomesticStudent* prev = head;
-  bool y = 0;
-  if (temp == nullptr){
-    cout << "Nothing to delete\n";
+    DomesticStudent* previous = NULL;
+    DomesticStudent* current = head;
+    bool y = 0;
+
+    while (current != NULL) {
+        string fullname = current -> getFirstName() + " " + current -> getLastName();
+        if (compareFullName(fullname, name) == 0){
+            if (previous == NULL) {
+                head = current -> next;
+            } else {
+                previous -> next = current -> next;
+                cout << current -> getFirstName() << " " << current -> getLastName()
+                     << " successfully deleted.\n";
+                y = 1;
+            }
+        } else {
+            previous = current; // if we removed current, let previous remain the same
+        }
+        current = current -> next;
+    }
+    if (!y){
+        cout << "No student with the name " << name << ".\n";
+    }
     return;
-  }
-  while (temp != nullptr){
-    string fullname = temp -> getFirstName() + " " + temp -> getLastName(); 
-    if(compareFullName(fullname, name) == 0){
-      if (temp == head){
-        head = temp -> next;
-        delete temp;
-      }
-      else if (temp == tail){
-        delete tail;
-        tail = prev;
-        tail -> next = nullptr;
-      }
-      else{
-        prev -> next = temp -> next;
-        delete temp;
-      }
-    y =  1;
-    cout << fullname << " successfully deleted\n";
-    }
-    if (temp == head -> next){
-      prev = head;
-    }
-    prev = prev -> next;
-    temp = temp -> next;
-  }
-  if (y == 0)
-    cout << "Nobody with the name " << name << " in the list\n";
 }
 
 void DomLinkedList::deleteDomHeadTail(){
@@ -552,40 +541,30 @@ void IntLinkedList::createIntStu(int& count){
 }
 
 void IntLinkedList::deleteIntStu(string name){
-  InternationalStudent* temp = head;
-  InternationalStudent* prev = head;
-  bool y = 0;
-  if (temp == nullptr){
-    cout << "Nothing to delete\n";
+    InternationalStudent* previous = NULL;
+    InternationalStudent* current = head;
+    bool y = 0;
+
+    while (current != NULL) {
+        string fullname = current -> getFirstName() + " " + current -> getLastName();
+        if (compareFullName(fullname, name) == 0){
+            if (previous == NULL) {
+                head = current -> next;
+            } else {
+                previous -> next = current -> next;
+                cout << current -> getFirstName() << " " << current -> getLastName()
+                     << " successfully deleted.\n";
+                y = 1;
+            }
+        } else {
+            previous = current; // if we removed current, let previous remain the same
+        }
+        current = current -> next;
+    }
+    if (!y){
+        cout << "No student with the name " << name << ".\n";
+    }
     return;
-  }
-  while (temp != nullptr){
-    string fullname = temp -> getFirstName() + " " + temp -> getLastName(); 
-    if(compareFullName(fullname, name) == 0){
-      if (temp == head){
-        head = temp -> next;
-        delete temp;
-      }
-      else if (temp == tail){
-        delete tail;
-        tail = prev;
-        tail -> next = nullptr;
-      }
-      else{
-        prev -> next = temp -> next;
-        delete temp;
-      }
-    y =  1;
-    cout << fullname << " successfully deleted\n";
-    }
-    if (temp == head -> next){
-      prev = head;
-    }
-    prev = prev -> next;
-    temp = temp -> next;
-  }
-  if (y == 0)
-    cout << "Nobody with the name " << name << " in the list\n";
 }
 void IntLinkedList::deleteIntHeadTail(){
     InternationalStudent *temp = head; 
@@ -613,6 +592,29 @@ InternationalStudent* IntLinkedList::getHead(){
   return head;
 }
 
+void IntLinkedList::deleteLowToefl(){
+    InternationalStudent* previous = NULL;
+    InternationalStudent* current = head;
+
+    while (current != NULL) {
+        if (current -> getToefl().getWriting() < 20 ||
+            current -> getToefl().getReading() < 20 || 
+            current -> getToefl().getListening() < 20 || 
+            current -> getToefl().getSpeaking() < 20 || 
+            current -> getToefl().getTOEFL() < 93){
+            if (previous == NULL) {
+                head = current -> next;
+            } else {
+                previous -> next = current -> next;
+            }
+        } else {
+            previous = current; // if we removed current, let previous remain the same
+        }
+        current = current -> next;
+    }
+    return;
+}
+
 ////////////////////////STUDENT////////////////////////////////
 //research score -> cgpa -> domestic > international
 int sizeofLists(IntLinkedList inter, DomLinkedList dom, int &sizeI, int &sizeD){
@@ -638,56 +640,67 @@ void GenLinkedList::mergeGenStudent(IntLinkedList inter, DomLinkedList dom){
     int size = sizeofLists(inter, dom, sizeI, sizeD);
     InternationalStudent* temp1 = inter.getHead();
     DomesticStudent* temp2 = dom.getHead();
-	Student stud[size];
-	std::cout << "sizeD: " << sizeD << "\n";
-	std::cout << "sizeI: " << sizeI << "\n";
-	int i = 0;
+    //Student* thePtr;
+	Student* stud[size];
+	cout << "SizeD: " << sizeD << "\n";
+	cout << "SizeI: " << sizeI << "\n";
 
+	int i = 0;
 	while (temp1 != nullptr){
-        stud[i] = *temp1;
+        stud[i] = temp1;
 		temp1 = temp1 -> next; 
         i++;
     }
     while (temp2 != nullptr){
-        stud[i] = *temp2;
+        stud[i] = temp2;
 		temp2 = temp2 -> next; 
         i++;
-		
     }
+    
 	mergeSortGen(stud, 0, size - 1, 'r');
     mergeGenCGPA2(stud, 0, size - 1);
     mergeGen3(stud, 0, size - 1);
+    //cout << "          Name            | StudentID | CGPA | ResearchScore |   From   | ToeflScore\n";
+    Student* ptr;
+    int j = 0;
+    head = stud[j];
+    j++;
+    Student* temp = head;
+    while (j < size){
+        temp -> next = stud[j];
+        temp = temp -> next;
+        j++;
+    }
 	
-	Student *temp = new Student; 
-
-	for (int j = 0; j < size ; j++){
-
-		if(j == 0){
-			*temp = stud[j];
-			head = temp; 
-			head->next = temp -> next; 
-		}else if (j == size-1){
-			*temp = stud[j];
-			tail = temp; 
-		}else{
-			*temp = stud[j];
-		}
-		cout << "temp: " << *temp << "\n";
-		temp->next = new Student; 
-		temp = temp -> next; 
-	}
-	
-	temp->next = nullptr; 
-	cout << "last temp: " << *temp << "\n";
-
+	temp->next = nullptr;
+    return;
 }
 
-//only prints head
 void GenLinkedList::printList() const{
     Student* temp = head;
+
     while (temp != tail){
-        cout << *temp << "\n\n";
+        temp -> printInfo(cout);
+        //cout << *temp << "\n\n";
         temp = temp -> next;
-    }    
+        cout << endl;
+    }
     return;
+}
+
+void GenLinkedList::printByThresh(float CGPAThresh, float RSThresh){
+    Student* temp = head;
+    while (temp != nullptr){
+        if(temp->getRScore() >= RSThresh && ((temp->getCGPA() > CGPAThresh || CompareFloats2(temp->getCGPA(), CGPAThresh)))){
+            temp -> printInfo(cout);
+            cout << endl;
+        }
+        temp = temp -> next;
+    }
+}
+
+bool CompareFloats2 (float y1, float y2) 
+{
+   float diff = y1 - y2;
+   return (diff < 0.01) && (-diff < 0.01);
 }

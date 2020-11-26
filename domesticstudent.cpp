@@ -218,7 +218,17 @@ void mergeDom(DomesticStudent *arr, int min, int mid, int max, char c)
     j++;
     k++;
   }
-
+}
+// student.printInfo()                  /
+// Name              | StudentID | CGPA | ResearchScore |   From   | ToeflScore |
+// Sina Haghighi       20203013     1.0        199       SouthKorea     120
+void DomesticStudent::printInfo(ostream& outs){
+    string fullname = getFirstName() + " " + getLastName();
+    outs <<"\033[32m" << left << setw(25) << fullname << "   2020"; 
+    formatID(outs, getid());
+    outs << "     " << fixed << setprecision(1) << getCGPA() << "        " << setw(3) << getRScore() << "       " 
+		 << setw(10) <<  getProvince();// << "     ";
+	return; 
 }
 
 //This is the merge sort function to be called in the main, will recur

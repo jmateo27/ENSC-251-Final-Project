@@ -28,6 +28,7 @@ class DomesticStudent : public Student{ //Creating a Domestic child class
         //Precondition: this function is used to compare the Province of 2 students,
         //Depending on which input is greater (alphabetically) the function will output a 1 or -1
         //And if the inputs have the same value, it returns a 0 it is used in the sorting function
+        void printInfo(ostream& outs);
         DomesticStudent* next;
 
     private: // The following are the private members
@@ -35,6 +36,7 @@ class DomesticStudent : public Student{ //Creating a Domestic child class
                               // The rest are here, but since they are defined in the parent class they do not need to be redeclared
 };
 #endif
+
 
 DomesticStudent* DomArray(DomesticStudent *ptr, int &size); // used to set data from the txt file to an array
 void mergeSortDom(DomesticStudent *arr, int min, int max, char c); // merge sort function for the domestic students depending on parameter 

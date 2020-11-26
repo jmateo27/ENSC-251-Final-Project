@@ -1,5 +1,7 @@
 #include "student.hpp"
 #include "LinkedList.hpp"
+#include <typeinfo>
+#include <iostream>
 /**********************************Student class constructors****************************************/
 Student::Student(std::string FName, std::string LName, float grade, int RScore, int id) 
   : FirstName(FName), LastName(LName), ResearchScore(RScore), AppID(id){
@@ -194,7 +196,7 @@ int compareFullName(string n1, string n2){
 }
 
 
-void mergeSortGen(Student *arr, int min, int max, char c){
+void mergeSortGen(Student *arr[], int min, int max, char c){
 	if (min < max){   
 		int mid = min + (max - min) / 2;
 		mergeSortGen(arr, min, mid, c);
@@ -203,14 +205,19 @@ void mergeSortGen(Student *arr, int min, int max, char c){
 	}
 }
 
-void mergeGen(Student *arr, int min, int mid, int max, char c){
+void mergeGen(Student *arr[], int min, int mid, int max, char c){
   int n1 = mid - min + 1, n2 = max - mid;
-  Student leftArray[n1], rightArray[n2];
+  Student *leftArray[n1], *rightArray[n2];
 
-  for(int i = 0; i < n1; i++)
+
+  for(int i = 0; i < n1; i++){
     leftArray[i] = arr[min + i];
-  for(int j = 0; j < n2; j++)
-    rightArray[j] = arr[mid + 1 + j];
+  }
+
+  for(int j = 0; j < n2; j++){
+	rightArray[j] = arr[mid + 1 + j];
+  }
+
 
   int i = 0, j = 0, k = min; 
   
@@ -236,7 +243,7 @@ void mergeGen(Student *arr, int min, int mid, int max, char c){
   }
   } else if (c == 'r' || c == 'R'){ 
     while (i < n1 && j < n2){
-      if (leftArray[i].getRScore() >= rightArray[j].getRScore()){
+      if (leftArray[i] -> getRScore() >= rightArray[j] -> getRScore()){
         arr[k] = leftArray[i];
         i++;
       }
@@ -249,11 +256,11 @@ void mergeGen(Student *arr, int min, int mid, int max, char c){
 
   }else if(c == 'c' || c == 'C'){   
     while (i < n1 && j < n2){
-      if (leftArray[i].getCGPA() >= rightArray[j].getCGPA()){   
+      if (leftArray[i]->getCGPA() >= rightArray[j]->getCGPA()){   
         arr[k] = leftArray[i];
         i++;
       }
-      else{                                                     
+      else{                                     
         arr[k] = rightArray[j];
         j++;  
       }
@@ -276,17 +283,15 @@ void mergeGen(Student *arr, int min, int mid, int max, char c){
 
 }
 
-void mergeGenCGPA2(Student *arr, int min, int max){
+void mergeGenCGPA2(Student *arr[], int min, int max){
   int i = min, j = min, activate = 0;  
   while (j != max || i != max){   
     j = i;   
-    while(j != max && compareCGPA(arr[j], arr[j+1]) == 0){
- 
+    while(j != max && compareResearchScore(*arr[j], *arr[j+1]) == 0){
       if (j == max + 1){  
         j = max;
       }else
         j++;
-
       activate = 1;
     }
 
@@ -301,11 +306,11 @@ void mergeGenCGPA2(Student *arr, int min, int max){
 }
 
 
-void mergeGen3(Student *arr, int min, int max){
+void mergeGen3(Student *arr[], int min, int max){
   int i = min, j = min, activate = 0;
   while (j != max || i != max){
     j = i;   
-    while(j != max && compareCGPA(arr[j], arr[j+1]) == 0){
+    while(j != max && compareCGPA(*arr[j], *arr[j+1]) == 0){
       if (j == max + 1){
         j = max;
       }else 
@@ -317,9 +322,14 @@ void mergeGen3(Student *arr, int min, int max){
     if (activate == 1){
       mergeSortGen(arr, i, j, 't');
       i = j;
-      activate = 0;    
+      activate = 0; 
     }else{
       i++; 
     }
   }
+}
+
+void Student::printInfo(ostream& outs){
+    outs << "Error. Info not available for base type." << endl;
+    return;
 }

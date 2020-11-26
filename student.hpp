@@ -77,7 +77,7 @@ class Student{ // Creating the Student Class
         friend std::ostream& operator <<(std::ostream& outs, const Student& theStudent);
         //Precondition: the insertion operator for use within our functions and to output
         //in the terminal
-
+        virtual void printInfo(ostream& outs);
         Student* next;
         
     private: // The following are the private members
@@ -96,7 +96,7 @@ void formatID(std::ostream& outs, const int num); // formats the ID for use with
 char giveback(std::string student, int n ); // used within the Student class
 int compareFullName(string n1, string n2);
 
-void mergeSortGen(Student *arr, int min, int max, char c);
-void mergeGenCGPA2(Student *arr, int min, int max);
-void mergeGen3(Student *arr, int min, int max);
-void mergeGen(Student *arr, int min, int mid, int max, char c);
+void mergeSortGen(Student *arr[], int min, int max, char c);
+void mergeGenCGPA2(Student *arr[], int min, int max);
+void mergeGen3(Student *arr[], int min, int max);
+void mergeGen(Student *arr[], int min, int mid, int max, char c);

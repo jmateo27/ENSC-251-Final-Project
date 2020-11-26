@@ -18,6 +18,7 @@ class IntLinkedList{
         void searchIntName(string name);
         void deleteIntStu(string name);
         void deleteIntHeadTail();
+        void deleteLowToefl();
         InternationalStudent* getHead();
     private:
         InternationalStudent *head,*tail, *next;
@@ -39,7 +40,7 @@ class DomLinkedList{
         void deleteDomStu(string name);
         void deleteDomHeadTail();
   private:
-        DomesticStudent *head,*tail, *next;
+        DomesticStudent *head, *tail;
 };
 
 class GenLinkedList{
@@ -47,9 +48,12 @@ class GenLinkedList{
         GenLinkedList();
         void mergeGenStudent(IntLinkedList, DomLinkedList);
         void printList() const;
+        void addStudent(Student* theStud);
+        void printByThresh(float CGPAThresh, float RSThresh);
     private:
-        Student *head, *tail, *next;
+        Student *head, *tail;
 };
 int sizeofLists(IntLinkedList inter, DomLinkedList dom);
 DomesticStudent* makeDomStu();
+bool CompareFloats2 (float y1, float y2);
 #endif

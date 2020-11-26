@@ -2,6 +2,7 @@
 #include "internationalstudent.hpp"
 #include "ToeflScore.hpp"
 #include <iostream>
+#include <iomanip>
 
 InternationalStudent::InternationalStudent(std::string FName, std::string LName, float grade, int RScore, int id, std::string Con, ToeflScore toefl)
     : Student(FName, LName, grade, RScore, id), Country(Con), theirscore(toefl){
@@ -57,7 +58,7 @@ std::ostream& operator <<(std::ostream& outs, const InternationalStudent& theInt
     ToeflScore thescore = theIntStudent.getToefl();
     outs << "The international student's name is: " << theIntStudent.getFirstName() << " " << theIntStudent.getLastName();
     outs << "\nThey are from: " << theIntStudent.getCountry();
-    outs << "\nThe CGPA is: " << theIntStudent.getCGPA();
+    outs << "\nThe CGPA is: " << fixed << setprecision(1) << (float)theIntStudent.getCGPA();
     outs << "\nThe Reseach Score is: " << theIntStudent.getRScore();
     outs << "\nThe student ID is: 2020";
     formatID(outs, theIntStudent.getid());
@@ -339,4 +340,12 @@ void dumpStu(InternationalStudent *arr, int &size){
   }
 
   size = newSize;
-}
+}  
+
+void InternationalStudent::printInfo(ostream& outs){
+    string fullname = getFirstName() + " " + getLastName();
+    outs <<"\033[33m" << left <<setw(25) << fullname << "   2020"; 
+    formatID(outs, getid());
+    outs << "     " << fixed << setprecision(1) << getCGPA() << "        " << setw(3) << getRScore() << "       " 
+		 << setw(10) << getCountry() << "     " << getToefl().getTOEFL() << "\033[0m";
+}                
