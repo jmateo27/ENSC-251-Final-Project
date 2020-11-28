@@ -10,8 +10,14 @@ class DomesticStudent : public Student{ //Creating a Domestic child class
         //Precondition: Defining the constructor with all parameters from the parent class Student with province
         DomesticStudent(std::string FName, std::string LName, int id, std::string Prov);
         //Precondition: Defining the constructor with Name and ID parameters from the parent class Student with province
+        DomesticStudent(DomesticStudent &stud);
         DomesticStudent();
+        virtual Student* copystu();
+        ~DomesticStudent(){
+            delete next;
+        }
         //Precondition: Initializing the constructor to initialized state
+        DomesticStudent& operator =(const DomesticStudent& r);
 
         std::string getProvince() const; 
         //Precondition: the Accessor function for the Province which returns the variable Province
@@ -28,7 +34,7 @@ class DomesticStudent : public Student{ //Creating a Domestic child class
         //Precondition: this function is used to compare the Province of 2 students,
         //Depending on which input is greater (alphabetically) the function will output a 1 or -1
         //And if the inputs have the same value, it returns a 0 it is used in the sorting function
-        void printInfo(ostream& outs);
+        void printInfo();
         DomesticStudent* next;
 
     private: // The following are the private members

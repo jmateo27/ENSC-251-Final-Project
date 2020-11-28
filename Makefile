@@ -9,6 +9,9 @@ run: main
 main: main.o student.o domesticstudent.o internationalstudent.o ToeflScore.o LinkedList.o
 	g++ -g -o main main.o student.o domesticstudent.o internationalstudent.o ToeflScore.o LinkedList.o
 
+test: main.cpp student.cpp internationalstudent.cpp domesticstudent.cpp LinkedList.cpp ToeflScore.cpp
+	g++ -o test -g main.cpp student.cpp internationalstudent.cpp domesticstudent.cpp LinkedList.cpp ToeflScore.cpp -std=c++11
+
 #compile the main.cpp to main.o
 main.o: main.cpp
 	g++ -g -c main.cpp -std=c++11
@@ -35,5 +38,6 @@ LinkedList.o: LinkedList.cpp
 
 #remove built files
 clean:
-	rm -rf main main.o student.o internationalstudent.o domesticstudent.o ToeflScore.o LinkedList.o *~
-  
+	rm -rf main main.o student.o internationalstudent.o domesticstudent.o ToeflScore.o LinkedList.o test *~
+
+

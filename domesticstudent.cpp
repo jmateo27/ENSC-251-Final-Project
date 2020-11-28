@@ -10,16 +10,53 @@ DomesticStudent::DomesticStudent(std::string FName, std::string LName, int id, s
     Student(FName, LName, id), Province(Prov){
 }
 
-DomesticStudent::DomesticStudent()
-{}
+DomesticStudent::DomesticStudent(DomesticStudent &stud) :
+    Student(stud.getFirstName(), stud.getLastName(), stud.getCGPA(), stud.getRScore(), stud.getid()), next(NULL){
+}
 
+DomesticStudent::DomesticStudent(){
+    
+}
+
+DomesticStudent& DomesticStudent::operator =(const DomesticStudent& r){
+	FirstName = r.getFirstName();
+	LastName = r.getLastName();
+	Province = r.getProvince();
+	ResearchScore = r.getRScore();
+	AppID = r.getid(); 
+	CGPA = r.getCGPA(); 
+    return *this;
+}
+
+Student* DomesticStudent::copystu(){
+    Student* toreturn;
+    DomesticStudent* copy = new DomesticStudent;
+    copy -> setFirstName(FirstName);
+    copy -> setLastName(LastName);
+    copy -> setCGPA(CGPA);
+    copy -> setResearchScore(ResearchScore);
+    copy -> setProvince(Province);
+    copy -> setAppID(AppID);
+    copy -> next = NULL;
+    toreturn = copy;
+    return toreturn;
+}
 
 std::string DomesticStudent::getProvince() const{
     return Province;
 }
 
-void DomesticStudent::setProvince(std::string Prov){
-  Province = Prov; 
+void DomesticStudent::setProvince(string Prov){
+    const char* provinces[13] = {"NL", "PE", "NS", "NB", "QC", "ON",
+                              "MB","SK", "AB", "BC", "YT", "NT", "NU"};
+    for (const char* i:provinces)
+        if (!strcmp(Prov.c_str(), i)){
+            Province = Prov;
+            return;
+        }
+    cout << getFirstName();
+    cout << Prov << " is not a valid province, exiting...\n";
+    exit(1);
 }
 
 
@@ -120,7 +157,7 @@ DomesticStudent* DomArray(DomesticStudent *ptr, int &size){
     //close your file
     domesticFile2.close();
     
-    return ptr;    //return the pointer to then update the pointer in the main
+    return ptr;
 }
 
 void mergeDom(DomesticStudent *arr, int min, int mid, int max, char c)
@@ -189,7 +226,7 @@ void mergeDom(DomesticStudent *arr, int min, int mid, int max, char c)
       k++;
     }
 
-  }else if (c == 'p' || c == 'P'){/*Sort by province and not by country, one difference between the counterpart functions*/
+  }else if (c == 'p' || c == 'P'){
     while (i < n1 && j < n2){
       if (compareProvince(leftArray[i], rightArray[j]) == 1){
         arr[k] = leftArray[i];
@@ -205,8 +242,7 @@ void mergeDom(DomesticStudent *arr, int min, int mid, int max, char c)
       k++;
     }
   }else
-    exit (1);   //should never be here, catch else statement
-
+    exit (1);   
   while (i <  n1){
     arr[k] = leftArray[i];
     i++;
@@ -219,19 +255,17 @@ void mergeDom(DomesticStudent *arr, int min, int mid, int max, char c)
     k++;
   }
 }
-// student.printInfo()                  /
-// Name              | StudentID | CGPA | ResearchScore |   From   | ToeflScore |
-// Sina Haghighi       20203013     1.0        199       SouthKorea     120
-void DomesticStudent::printInfo(ostream& outs){
+
+void DomesticStudent::printInfo(){
     string fullname = getFirstName() + " " + getLastName();
-    outs <<"\033[32m" << left << setw(25) << fullname << "   2020"; 
-    formatID(outs, getid());
-    outs << "     " << fixed << setprecision(1) << getCGPA() << "        " << setw(3) << getRScore() << "       " 
-		 << setw(10) <<  getProvince();// << "     ";
+    cout <<"\1xb[36m" << left << setw(25) << fullname << "   2020"; 
+    formatID(cout, getid());
+    cout << "     " << fixed << setprecision(1) << getCGPA() << "        " << setw(3) << getRScore() << "       " 
+		 << setw(10) <<  getProvince() << "\033[0m";// << "     ";
 	return; 
 }
 
-//This is the merge sort function to be called in the main, will recur
+
 void mergeSortDom(DomesticStudent *arr, int min, int max, char c){
   if (min < max){
     int mid = min + (max - min) / 2;
@@ -280,7 +314,7 @@ void mergeDom3(DomesticStudent *arr, int min, int max){
     }
 
     if (activate == 1){
-      mergeSortDom(arr, i, j, 'P'); //country merge
+      mergeSortDom(arr, i, j, 'P'); 
       i = j;
       activate = 0;    
     }else{

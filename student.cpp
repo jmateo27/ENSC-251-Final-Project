@@ -15,6 +15,11 @@ Student::Student(std::string FName, std::string LName, int id)
 Student::Student() 
 {}
 
+Student* Student::copystu(){
+    cout << "Shouldn't be here.\n";
+    exit(1);
+}
+
 /***************************************Set functions***********************************************/
 void Student::setFirstName(std::string FName){
     FirstName = FName;
@@ -329,7 +334,7 @@ void mergeGen3(Student *arr[], int min, int max){
   }
 }
 
-void Student::printInfo(ostream& outs){
-    outs << "Error. Info not available for base type." << endl;
+void Student::printInfo(){
+    cout << "Error. Info not available for base type." << endl;
     return;
 }

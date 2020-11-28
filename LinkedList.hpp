@@ -5,8 +5,7 @@
 #include "internationalstudent.hpp"
 
 
-
-class IntLinkedList{
+class IntLinkedList/* : public GenLinkedList */{
     public:
         IntLinkedList();
         void addIntStudent(InternationalStudent* stud);
@@ -20,11 +19,12 @@ class IntLinkedList{
         void deleteIntHeadTail();
         void deleteLowToefl();
         InternationalStudent* getHead();
+        //~IntLinkedList();
     private:
         InternationalStudent *head,*tail, *next;
 };
 
-class DomLinkedList{
+class DomLinkedList/* : public GenLinkedList */{
     public:
         DomLinkedList();
         void addDomStudent(DomesticStudent *stud);
@@ -39,6 +39,7 @@ class DomLinkedList{
         DomesticStudent* getHead();
         void deleteDomStu(string name);
         void deleteDomHeadTail();
+        //~DomLinkedList();
   private:
         DomesticStudent *head, *tail;
 };
@@ -50,10 +51,15 @@ class GenLinkedList{
         void printList() const;
         void addStudent(Student* theStud);
         void printByThresh(float CGPAThresh, float RSThresh);
+        //~GenLinkedList();
     private:
         Student *head, *tail;
 };
+
+
 int sizeofLists(IntLinkedList inter, DomLinkedList dom);
 DomesticStudent* makeDomStu();
 bool CompareFloats2 (float y1, float y2);
+DomLinkedList makeDomLinkedList(DomLinkedList &DList, int &stu_count);
+IntLinkedList makeIntLinkedList(IntLinkedList &IList, int &stu_count);
 #endif

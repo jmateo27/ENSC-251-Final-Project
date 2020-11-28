@@ -8,18 +8,23 @@ class InternationalStudent : public Student{ //Creating an International child c
     public: // The following are the public members
         InternationalStudent(std::string FName, std::string LName, float grade,int RScore, int id, std::string Con, ToeflScore toefl);
         InternationalStudent(std::string FName, std::string LName, int id, std::string Con, ToeflScore toefl);
+        InternationalStudent(InternationalStudent &stud);
         InternationalStudent();
-
+        ~InternationalStudent(){
+            delete next;
+        }
+        virtual Student* copystu();
+        InternationalStudent& operator =(const InternationalStudent& r);
         std::string getCountry() const;
         ToeflScore getToefl() const;
 
         void settoefl(ToeflScore thescore);
-        void setCountry(std::string Con);
+        bool setCountry(std::string Con);
         
-        friend std::ostream& operator <<(std::ostream& outs, const InternationalStudent& theIntStudent);
+/*         friend std::ostream& operator <<(std::ostream& outs, const InternationalStudent& theIntStudent); */
         
         friend int compareCountry(InternationalStudent student1, InternationalStudent student2);
-        void printInfo(ostream& outs);
+        void printInfo();
 		InternationalStudent* next;
 
     private: // The following are the private members

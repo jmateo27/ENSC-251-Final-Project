@@ -12,17 +12,16 @@ using std::string;
 class Student{ // Creating the Student Class
 //parent class of the DomesticStudent and InternationalStudent class
     public:
-
         //constructs
         Student(std::string FName, std::string LName, float grade, int RScore, int id);
         //Precondition: Constructor with all parameters for the function used within our code
         // determined by all the values in the private members
         Student(std::string FName, std::string LName, int id);
         //Precondition: Constructor with the First Name and Last Name and the student ID
+        virtual Student* copystu();
         Student();
         //Precondition: Initializer for the constructors, it sets the values of the parameters to 
         //their initialized state
-
         //set functions
         void setFirstName(std::string FName);
         //Precondition: Mutator function for the first name of students
@@ -39,7 +38,6 @@ class Student{ // Creating the Student Class
         void setAppID(int id);
         // Precondition: Mutator function for the Student ID of students, 
         //used to create the arrays we use in our code from the text files
-		
         //get functions 
         std::string getFirstName() const; 
         // Precondition: Accessor function for the first name of students, 
@@ -56,7 +54,6 @@ class Student{ // Creating the Student Class
         int getid() const; 
         // Precondition: Accessor function for the Student ID of students, 
         //used to retrieve data from arrays we use in our code from the text files
-
         //compare functions
         friend int compareCGPA(Student student1, Student student2);
         //Precondition: this function is used to compare the CGPA of 2 students,
@@ -77,10 +74,10 @@ class Student{ // Creating the Student Class
         friend std::ostream& operator <<(std::ostream& outs, const Student& theStudent);
         //Precondition: the insertion operator for use within our functions and to output
         //in the terminal
-        virtual void printInfo(ostream& outs);
+        virtual void printInfo();
         Student* next;
         
-    private: // The following are the private members
+    protected: // The following are the private members
         std::string FirstName; // private member variable First Name for ADT
         std::string LastName; // private member variable Last Name for ADT
         float CGPA; // private member variable CGPA of type float and follows ADT

@@ -12,8 +12,40 @@ InternationalStudent::InternationalStudent(std::string FName, std::string LName,
     Student(FName, LName, id), Country(Con), theirscore(toefl){
 }
 
-InternationalStudent::InternationalStudent() 
-{}
+InternationalStudent::InternationalStudent(InternationalStudent &stud) :
+    Student(stud.getFirstName(), stud.getLastName(), stud.getCGPA(),
+                         stud.getRScore(), stud.getid()), Country(stud.getCountry()),
+                         theirscore(stud.getToefl()), next(NULL){
+}
+
+InternationalStudent::InternationalStudent() {
+}
+
+InternationalStudent& InternationalStudent::operator =(const InternationalStudent& r){
+	FirstName = r.getFirstName();
+	LastName = r.getLastName();
+	Country = r.getCountry();
+	ResearchScore = r.getRScore();
+	AppID = r.getid(); 
+	CGPA = r.getCGPA(); 
+	theirscore = r.getToefl(); 
+    return *this;
+}
+    
+Student* InternationalStudent::copystu(){
+    Student* toreturn;
+    InternationalStudent* copy = new InternationalStudent;
+    (*copy).setFirstName(FirstName);
+    (*copy).setLastName(LastName);
+    (*copy).setCGPA(CGPA);
+    (*copy).setResearchScore(ResearchScore);
+    (*copy).setCountry(Country);
+    (*copy).setAppID(AppID);
+    (*copy).settoefl(theirscore);
+    copy -> next = NULL;
+    toreturn = copy;
+    return toreturn;
+}
 
 int compareCountry(InternationalStudent student1, InternationalStudent student2){
     std::string c1 = student1.getCountry();
@@ -48,9 +80,19 @@ void InternationalStudent::settoefl(ToeflScore thescore){
     theirscore = thescore;
 }
 
-
-void InternationalStudent::setCountry(std::string Con){
-    Country = Con;
+bool InternationalStudent::setCountry(std::string Con){
+    const char* countries[4] = {"China", "Korea", "India", "Iran"};
+    for (const char* i:countries)
+        if (!strcmp(Con.c_str(), i)){
+            Country = Con;
+            return 1;
+        }
+    if (!strcmp(Con.c_str(), "Idian")){
+        Country = "India";
+        return 0;
+    }
+    cout << "The country inputted is not valid, exiting...\n";
+    exit(1);
 }
 
 std::ostream& operator <<(std::ostream& outs, const InternationalStudent& theIntStudent)
@@ -62,7 +104,7 @@ std::ostream& operator <<(std::ostream& outs, const InternationalStudent& theInt
     outs << "\nThe Reseach Score is: " << theIntStudent.getRScore();
     outs << "\nThe student ID is: 2020";
     formatID(outs, theIntStudent.getid());
-    outs << "\nThe student TOEFL score is: \nReading: " << thescore.getReading() << "/30" << "\nListening: " << thescore.getListening();
+    outs << "\nThe student TOEFL score is: \nReading: " <<     thescore.getReading() << "/30" << "\nListening: " << thescore.getListening();
     outs << "/30" << "\nSpeaking: " << thescore.getSpeaking() << "/30" << "\nWriting: " << thescore.getWriting() << "/30\n";
     return outs;
 }
@@ -342,10 +384,11 @@ void dumpStu(InternationalStudent *arr, int &size){
   size = newSize;
 }  
 
-void InternationalStudent::printInfo(ostream& outs){
+void InternationalStudent::printInfo(){
     string fullname = getFirstName() + " " + getLastName();
-    outs <<"\033[33m" << left <<setw(25) << fullname << "   2020"; 
-    formatID(outs, getid());
-    outs << "     " << fixed << setprecision(1) << getCGPA() << "        " << setw(3) << getRScore() << "       " 
-		 << setw(10) << getCountry() << "     " << getToefl().getTOEFL() << "\033[0m";
-}                
+    cout <<"\033[33m" << left <<setw(25) << fullname << "   2020"; 
+    formatID(cout, getid());
+    cout << "     " << fixed << setprecision(1) << getCGPA() << "        " << setw(3) << getRScore() << "       " 
+		 << setw(10) << getCountry() << "     " << getToefl().getTOEFL() << "\033[0m" ;
+}
+
