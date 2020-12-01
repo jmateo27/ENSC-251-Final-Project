@@ -1,0 +1,40 @@
+Insert function: O(n)
+    Function names: (1) void addDomStudent(DomesticStudent *stud) and etc
+
+    The insert functions utilize a while loop that potentially traverses
+    through the whole list, using if/switch statements to determine when
+    to break out of the while loop and return. The time complexity 
+    therefore is determined by the length of the list or when the if's are 
+    caught, hence n.
+
+Search function: O(n), O(n)
+    Function names: (1) void searchDomCGPA(float CGPA) and etc.
+                    (2) void searchDomName(string name) and etc.
+
+    The search functions utilize a while loop that traverses the whole
+    list. Therefore, time complexity depends on how many elements are
+    in the list, hence n.
+
+Deletion function: O(n), O(n)
+    Function names: (1) void deleteDomStu(string name) and etc.
+                    (2) void deleteDomHeadTail();
+
+    The deletion functions utilize a while loop that traverses the whole
+    list. The function is only done executing when the whole list has been
+    traversed to account for duplicate names. Therefore, time complexity
+    depends on how many elements are in the list, hence n.
+
+
+Merge function: O(nlog(n)), O(nlog(n))
+    Function names: (1) void mergeGenStudent(IntLinkedList, DomLinkedList)
+					    i) void mergeSortGen(Student *arr[], int min,
+											  int max, char c)
+
+    The merge function utilizes three while loops to copy elements to or
+    from pointer arrays and also a three mergesort functions. The function
+    begins by copying the contents of each student list into the pointer
+    array. Then merge sorts the pointer array 3 times, once by research 
+    score, then sections by CGPA, and lastly sections by student type.
+    This is then concluded by a while loop that copies its contents into
+    the said GenLinkedList. The final time complexity cumulatively becomes
+    O(3n + 3nlog(n)) but simplifies to O(nlogn), ignoring coefficients.

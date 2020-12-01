@@ -1,0 +1,2 @@
+FirstName,LastName,Province,CGPA,ResearchScore
+Micheal,Scott,BV,4.00,75

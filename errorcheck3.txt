@@ -1,0 +1,2 @@
+FirstName,LastName,Country,CGPA,ResearchScore,Reading,Listening,Speaking,Writing
+Kerry,Kim,Korean,4.00,78,20,20,20,20

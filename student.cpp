@@ -4,17 +4,21 @@
 #include <iostream>
 /**********************************Student class constructors****************************************/
 Student::Student(std::string FName, std::string LName, float grade, int RScore, int id) 
-  : FirstName(FName), LastName(LName), ResearchScore(RScore), AppID(id){
+  : FirstName(FName), LastName(LName){
+    setResearchScore(RScore);
+    setAppID(id);
     setCGPA(grade);
 }
 
 Student::Student(std::string FName, std::string LName, int id)
-    : FirstName(FName), LastName(LName), AppID(id){
+    : FirstName(FName), LastName(LName){
+    setAppID(id);
 }
 
 Student::Student() 
 {}
 
+//virtual function
 Student* Student::copystu(){
     cout << "Shouldn't be here.\n";
     exit(1);
@@ -43,11 +47,21 @@ void Student::setCGPA(float grade){
 }
 
 void Student::setResearchScore(int RScore){  
-    ResearchScore = RScore; 
+    if (RScore > 100)
+        ResearchScore = 100;
+    else if (RScore < 0)
+        ResearchScore = 0;
+    else
+        ResearchScore = RScore; 
 }
 
-void Student::setAppID(int id){   
-    AppID = id; 
+void Student::setAppID(int id){
+    if (id > 9999)
+        AppID = 9999;
+    else if (id < 0)
+        AppID = 0;
+    else
+        AppID = id;   
 }
 
 /*****************************************Get functions*********************************************/
@@ -81,7 +95,6 @@ std::ostream& operator <<(std::ostream& outs, const Student& theStudent)
     outs << "\n";
     return outs;
 }
-
 
 /****************************Compare functions for Student****************************************/
 int compareResearchScore(Student student1, Student student2){
@@ -166,41 +179,48 @@ char upper2lowercase(char c){
 void formatID(std::ostream& outs, const int num) {
     int i = 0;
 
-    if (num - 10 < 0) //if one digit, follow with 3 zeros
+	//fills with the appropriate amount of digits
+    if (num - 10 < 0) 
         i = 3;
-    else if (num - 100 < 0) //if two digits, follow with 2 zeros
+    else if (num - 100 < 0) 
         i = 2;
-    else if (num - 1000 < 0) //if three digits, follow with 1 zero
+    else if (num - 1000 < 0) 
         i = 1;
-    else                  //if four digits, follow with no zeros
+    else                  
         i = 0;
-
-    while (i != 0){     //displaying the output depending on how many digits
+	//displaying the output depending on how many digits
+    while (i != 0){     
         outs << "0";
         i--;
     } 
-    outs << num;      //output to outs, general output stream
+    outs << num;
 }
 
+
 int compareFullName(string n1, string n2){
+
     int len = 0;
+	//assigns largest length to len
     if (n1.length() >= n2.length())
         len = n1.length();
     else
         len = n2.length();
 
+	
     for (int i = 0; i < len; i++){
-        if (upper2lowercase(n1[i]) < upper2lowercase(n2[i])){
-            return 1;
+        if (upper2lowercase(n1[i]) < upper2lowercase(n2[i])){ //n1 > n2
+            return 1; 
         }
-        else if (upper2lowercase(n2[i]) > upper2lowercase(n2[i])){
+        else if (upper2lowercase(n2[i]) > upper2lowercase(n2[i])){ //n2 > n1
             return -1;
         }
     }
+	//n1 == n2
     return 0;
 }
 
 
+//mergesorting functions
 void mergeSortGen(Student *arr[], int min, int max, char c){
 	if (min < max){   
 		int mid = min + (max - min) / 2;
@@ -226,7 +246,7 @@ void mergeGen(Student *arr[], int min, int mid, int max, char c){
 
   int i = 0, j = 0, k = min; 
   
-  if (c == 't' || c == 'T'){   
+  if (c == 't' || c == 'T'){   //sorts by type of student
     char domstr[] = "DomesticStudent";
     char intstr[] = "InternationalStudent";
   while (i < n1 && j < n2){
@@ -246,7 +266,7 @@ void mergeGen(Student *arr[], int min, int mid, int max, char c){
     }
     k++;
   }
-  } else if (c == 'r' || c == 'R'){ 
+  } else if (c == 'r' || c == 'R'){ //sorts by research score
     while (i < n1 && j < n2){
       if (leftArray[i] -> getRScore() >= rightArray[j] -> getRScore()){
         arr[k] = leftArray[i];
@@ -259,7 +279,7 @@ void mergeGen(Student *arr[], int min, int mid, int max, char c){
       k++;
     }
 
-  }else if(c == 'c' || c == 'C'){   
+  }else if(c == 'c' || c == 'C'){   //sorts by cgpa
     while (i < n1 && j < n2){
       if (leftArray[i]->getCGPA() >= rightArray[j]->getCGPA()){   
         arr[k] = leftArray[i];
@@ -289,7 +309,9 @@ void mergeGen(Student *arr[], int min, int mid, int max, char c){
 }
 
 void mergeGenCGPA2(Student *arr[], int min, int max){
-  int i = min, j = min, activate = 0;  
+  int i = min, j = min, activate = 0; 
+
+  //iterates to find a chunk with the same values then sorts the chunk 
   while (j != max || i != max){   
     j = i;   
     while(j != max && compareResearchScore(*arr[j], *arr[j+1]) == 0){
@@ -325,6 +347,7 @@ void mergeGen3(Student *arr[], int min, int max){
     }
 
     if (activate == 1){
+	//sends to sort by type
       mergeSortGen(arr, i, j, 't');
       i = j;
       activate = 0; 
@@ -334,6 +357,7 @@ void mergeGen3(Student *arr[], int min, int max){
   }
 }
 
+//error catch
 void Student::printInfo(){
     cout << "Error. Info not available for base type." << endl;
     return;

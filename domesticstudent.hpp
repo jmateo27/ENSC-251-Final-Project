@@ -12,12 +12,15 @@ class DomesticStudent : public Student{ //Creating a Domestic child class
         //Precondition: Defining the constructor with Name and ID parameters from the parent class Student with province
         DomesticStudent(DomesticStudent &stud);
         DomesticStudent();
+
+
         virtual Student* copystu();
-        ~DomesticStudent(){
-            delete next;
-        }
-        //Precondition: Initializing the constructor to initialized state
+        //virtual function 
+		//deep copies information 
+
         DomesticStudent& operator =(const DomesticStudent& r);
+		//Makes a shallow copy of the input of the student on the right 
+		//of the assignment operator
 
         std::string getProvince() const; 
         //Precondition: the Accessor function for the Province which returns the variable Province
@@ -29,13 +32,17 @@ class DomesticStudent : public Student{ //Creating a Domestic child class
         friend std::ostream& operator <<(std::ostream& outs, const DomesticStudent& theDomStudent);
         //Precondition: The insertion operator is used to output information 
         //from the cpp files to the terminal
+		
         friend int compareProvince(DomesticStudent student1, DomesticStudent student2);
-
         //Precondition: this function is used to compare the Province of 2 students,
         //Depending on which input is greater (alphabetically) the function will output a 1 or -1
         //And if the inputs have the same value, it returns a 0 it is used in the sorting function
         void printInfo();
+		//virtual function 
+		//prints the name, id, cgpa, research score, and province in yellow
+
         DomesticStudent* next;
+		//pointer used to refer to the next student in the list
 
     private: // The following are the private members
         std::string Province; // only the province member is private because it is unique to the Domestic Students Class
@@ -50,3 +57,4 @@ void mergeSortDom(DomesticStudent *arr, int min, int max, char c); // merge sort
 void mergeDomCGPA2(DomesticStudent *arr, int min, int max); // merging the sorted array for CGPA
 void mergeDom3(DomesticStudent *arr, int min, int max); // merging the sorted domestic array
 void getDomArray(DomesticStudent *ptr, int size); // returns the value from the domestic array
+

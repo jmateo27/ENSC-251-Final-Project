@@ -1,0 +1,2 @@
+FirstName,LastName,Province,CGPA,ResearchScore
+Terry,Cruise,BC,90

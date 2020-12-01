@@ -5,20 +5,24 @@
 #include <iomanip>
 
 InternationalStudent::InternationalStudent(std::string FName, std::string LName, float grade, int RScore, int id, std::string Con, ToeflScore toefl)
-    : Student(FName, LName, grade, RScore, id), Country(Con), theirscore(toefl){
+    : Student(FName, LName, grade, RScore, id){
+    setCountry(Con);
+    settoefl(toefl);
 }
 
-InternationalStudent::InternationalStudent(std::string FName, std::string LName, int id, std::string Con, ToeflScore toefl) :
-    Student(FName, LName, id), Country(Con), theirscore(toefl){
+InternationalStudent::InternationalStudent(std::string FName, std::string LName, int id, std::string Con, ToeflScore toefl) : Student(FName, LName, id){
+    setCountry(Con);
+    settoefl(toefl);   
 }
 
 InternationalStudent::InternationalStudent(InternationalStudent &stud) :
     Student(stud.getFirstName(), stud.getLastName(), stud.getCGPA(),
-                         stud.getRScore(), stud.getid()), Country(stud.getCountry()),
-                         theirscore(stud.getToefl()), next(NULL){
+			stud.getRScore(), stud.getid()), Country(stud.getCountry()),
+			theirscore(stud.getToefl()), next(NULL){
 }
 
-InternationalStudent::InternationalStudent() {
+InternationalStudent::InternationalStudent() : Student("", "", 0, 0, 0), next(nullptr), Country(""){
+
 }
 
 InternationalStudent& InternationalStudent::operator =(const InternationalStudent& r){
@@ -33,6 +37,7 @@ InternationalStudent& InternationalStudent::operator =(const InternationalStuden
 }
     
 Student* InternationalStudent::copystu(){
+	try{
     Student* toreturn;
     InternationalStudent* copy = new InternationalStudent;
     (*copy).setFirstName(FirstName);
@@ -45,6 +50,12 @@ Student* InternationalStudent::copystu(){
     copy -> next = NULL;
     toreturn = copy;
     return toreturn;
+	}
+	catch(bad_alloc){
+		cout << "Bad Allocation... exiting\n";
+		cout << "\033[0m";
+		exit(1);
+    }
 }
 
 int compareCountry(InternationalStudent student1, InternationalStudent student2){
@@ -82,16 +93,25 @@ void InternationalStudent::settoefl(ToeflScore thescore){
 
 bool InternationalStudent::setCountry(std::string Con){
     const char* countries[4] = {"China", "Korea", "India", "Iran"};
-    for (const char* i:countries)
-        if (!strcmp(Con.c_str(), i)){
-            Country = Con;
+	for(int i = 0; i < 4; i++){
+		std::string cntry = countries[i];
+		for(int j = 0; j < cntry.length(); j++){
+			cntry[j] = tolower(cntry[j]);
+		}
+		for(int k = 0; k < Con.length(); k++){
+			Con[k] = tolower(Con[k]);
+		}
+		if(Con.compare(cntry) == 0){
+			Country = countries[i];
+			return 1;
+		}
+		if (Con.compare("idian") == 0){
+        	Country = "India";
             return 1;
-        }
-    if (!strcmp(Con.c_str(), "Idian")){
-        Country = "India";
-        return 0;
+        }    
     }
     cout << "The country inputted is not valid, exiting...\n";
+	cout << "\033[0m";
     exit(1);
 }
 
@@ -111,7 +131,8 @@ std::ostream& operator <<(std::ostream& outs, const InternationalStudent& theInt
 
 
 InternationalStudent* InterArray(InternationalStudent *ptr, int &size){
-    std::string line;
+    try{
+	std::string line;
     char temp; 
     ToeflScore *thetoefl;
     ifstream internationalFile("international-stu.txt");
@@ -188,6 +209,12 @@ InternationalStudent* InterArray(InternationalStudent *ptr, int &size){
     //close your file
     internationalFile2.close();
     return ptr;
+	}
+	catch(bad_alloc){
+		cout << "Bad Allocation... exiting\n";
+		cout << "\033[0m";
+		exit(1);
+    }
 }
 
 
@@ -273,8 +300,11 @@ void mergeInt(InternationalStudent *arr, int min, int mid, int max, char c)
       }
       k++;
     }
-  }else    
+  }else {
+	cout << "\033[0m";
     exit(1);
+  }
+	
 
   while (i <  n1){
     arr[k] = leftArray[i];
@@ -391,4 +421,3 @@ void InternationalStudent::printInfo(){
     cout << "     " << fixed << setprecision(1) << getCGPA() << "        " << setw(3) << getRScore() << "       " 
 		 << setw(10) << getCountry() << "     " << getToefl().getTOEFL() << "\033[0m" ;
 }
-

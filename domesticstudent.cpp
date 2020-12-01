@@ -2,21 +2,25 @@
 #include <iostream>
 #include <iomanip>
 
+//Constructor functions
 DomesticStudent::DomesticStudent(std::string FName, std::string LName, float grade, int RScore, int id, std::string Prov)
-    : Student(FName, LName, grade, RScore, id), Province(Prov){
+    : Student(FName, LName, grade, RScore, id){
+    setProvince(Prov);
 }
 
 DomesticStudent::DomesticStudent(std::string FName, std::string LName, int id, std::string Prov):
-    Student(FName, LName, id), Province(Prov){
+    Student(FName, LName, id){
+    setProvince(Prov);
 }
 
 DomesticStudent::DomesticStudent(DomesticStudent &stud) :
     Student(stud.getFirstName(), stud.getLastName(), stud.getCGPA(), stud.getRScore(), stud.getid()), next(NULL){
 }
 
-DomesticStudent::DomesticStudent(){
-    
+//setting all values to be empty or null
+DomesticStudent::DomesticStudent() : Student("", "", 0, 0, 0), Province(""), next(nullptr) {
 }
+
 
 DomesticStudent& DomesticStudent::operator =(const DomesticStudent& r){
 	FirstName = r.getFirstName();
@@ -29,17 +33,24 @@ DomesticStudent& DomesticStudent::operator =(const DomesticStudent& r){
 }
 
 Student* DomesticStudent::copystu(){
-    Student* toreturn;
-    DomesticStudent* copy = new DomesticStudent;
-    copy -> setFirstName(FirstName);
-    copy -> setLastName(LastName);
-    copy -> setCGPA(CGPA);
-    copy -> setResearchScore(ResearchScore);
-    copy -> setProvince(Province);
-    copy -> setAppID(AppID);
-    copy -> next = NULL;
-    toreturn = copy;
-    return toreturn;
+	try{
+		Student* toreturn;
+		DomesticStudent* copy = new DomesticStudent;
+		copy -> setFirstName(FirstName);
+		copy -> setLastName(LastName);
+		copy -> setCGPA(CGPA);
+		copy -> setResearchScore(ResearchScore);
+		copy -> setProvince(Province);
+		copy -> setAppID(AppID);
+		copy -> next = NULL;
+		toreturn = copy;
+		return toreturn;
+	}
+	catch(bad_alloc){
+		cout << "Bad Allocation... exiting\n";
+		cout << "\033[0m";
+		exit(1);
+    }
 }
 
 std::string DomesticStudent::getProvince() const{
@@ -54,8 +65,9 @@ void DomesticStudent::setProvince(string Prov){
             Province = Prov;
             return;
         }
-    cout << getFirstName();
+    cout <<"\nFor " << getFirstName() << " " << getLastName() << "\n";
     cout << Prov << " is not a valid province, exiting...\n";
+    cout <<  "\033[0m";
     exit(1);
 }
 
@@ -94,7 +106,7 @@ std::ostream& operator <<(std::ostream& outs, const DomesticStudent& theDomStude
 }
 
 DomesticStudent* DomArray(DomesticStudent *ptr, int &size){
-
+try{
     std::string line;
     char temp; 
     ifstream domesticFile("domestic-stu.txt");
@@ -158,6 +170,12 @@ DomesticStudent* DomArray(DomesticStudent *ptr, int &size){
     domesticFile2.close();
     
     return ptr;
+	}
+	catch(bad_alloc){
+		cout << "Bad Allocation... exiting\n";
+		cout << "\033[0m";
+		exit(1);
+    }
 }
 
 void mergeDom(DomesticStudent *arr, int min, int mid, int max, char c)
@@ -258,10 +276,10 @@ void mergeDom(DomesticStudent *arr, int min, int mid, int max, char c)
 
 void DomesticStudent::printInfo(){
     string fullname = getFirstName() + " " + getLastName();
-    cout <<"\1xb[36m" << left << setw(25) << fullname << "   2020"; 
+    cout << "\x1b[36m" << left << setw(25) << fullname << "   2020"; 
     formatID(cout, getid());
     cout << "     " << fixed << setprecision(1) << getCGPA() << "        " << setw(3) << getRScore() << "       " 
-		 << setw(10) <<  getProvince() << "\033[0m";// << "     ";
+		 << setw(12) <<   getProvince() << "\033[0m";// << "     ";
 	return; 
 }
 
